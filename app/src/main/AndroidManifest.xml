@@ -10,8 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PeoplesСontrol">
         <activity
-            android:name=".MainActivity"
-            android:exported="true">
+            android:name=".ui.view.main.MainActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.view.login.LoginActivity"
+            android:exported="true"
+            android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

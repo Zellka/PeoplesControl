@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">People\'s Сontrol</string>
+    <string name="input_number">Номер</string>
+    <string name="btn_ok">OK</string>
+    <string name="title_registration">Регистрация</string>
+    <string name="input_password">Пароль</string>
+    <string name="input_name">ФИО</string>
+    <string name="input_email">Email</string>
+    <string name="title_region">Выбор региона</string>
+    <string name="title_login">Вход</string>
+    <string name="title_no_auth">Зарегистрироваться</string>
+    <string name="title_categories">Сферы</string>
+    <string name="title_map">Карта проблемных зон</string>
+    <string name="title_appeals">Заявки</string>
+    <string name="title_new_appeal">Новая заявка</string>
+    <string name="title_archive">Мой архив</string>
+    <string name="title_profile">Профиль</string>
 </resources>
