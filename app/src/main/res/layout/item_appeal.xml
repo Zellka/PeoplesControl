@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/image_appeal"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@drawable/ic_profile_24"
+        tools:ignore="MissingConstraints" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/name_appeal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Авария"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toEndOf="@+id/image_appeal"
+        tools:ignore="MissingConstraints" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/description_appeal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:text="Большая авария, 2 машины, несколько пострадавших"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toEndOf="@+id/image_appeal"
+        app:layout_constraintTop_toBottomOf="@+id/name_appeal"
+        tools:ignore="MissingConstraints" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/address_appeal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Адрес: г.Донецк, ул.Артёма, 46"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toEndOf="@+id/image_appeal"
+        app:layout_constraintTop_toBottomOf="@id/description_appeal"
+        tools:ignore="MissingConstraints" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/coordinates_appeal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Координаты: 53, 26"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toEndOf="@+id/image_appeal"
+        app:layout_constraintTop_toBottomOf="@id/address_appeal"
+        tools:ignore="MissingConstraints" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/id_appeal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="№ 12335"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/image_appeal"
+        tools:ignore="MissingConstraints" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/num_appeals"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="20 заявок"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/id_appeal"
+        tools:ignore="MissingConstraints" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/date_appeal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="14.01.22 12:30"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/num_appeals"
+        tools:ignore="MissingConstraints" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/status_appeal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="В обработке"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/date_appeal"
+        tools:ignore="MissingConstraints" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Добавить"
+        app:layout_constraintBottom_toBottomOf="@+id/status_appeal"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:ignore="MissingConstraints" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
