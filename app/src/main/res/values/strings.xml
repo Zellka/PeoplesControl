@@ -15,4 +15,8 @@
     <string name="title_new_appeal">Новая заявка</string>
     <string name="title_archive">Мой архив</string>
     <string name="title_profile">Профиль</string>
+    <string name="tab_number">Номер</string>
+    <string name="tab_name">Название</string>
+    <string name="tab_rating">Рейтинг</string>
+    <string name="tab_date">Дата</string>
 </resources>
