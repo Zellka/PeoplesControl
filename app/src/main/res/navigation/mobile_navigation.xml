@@ -38,11 +38,7 @@
         android:id="@+id/navigation_appeal"
         android:name="com.example.peoplesontrol.ui.view.main.NewAppealFragment"
         android:label="@string/title_new_appeal"
-        tools:layout="@layout/fragment_new_appeal">
-        <action
-            android:id="@+id/action_appealFragment_to_appealsFragment"
-            app:destination="@id/navigation_appeals" />
-    </fragment>
+        tools:layout="@layout/fragment_new_appeal" />
 
     <fragment
         android:id="@+id/navigation_archive"
@@ -52,7 +48,16 @@
         <action
             android:id="@+id/action_archiveFragment_to_appealFragment"
             app:destination="@id/navigation_appeal" />
+        <action
+            android:id="@+id/action_archiveFragment_to_profileFragment"
+            app:destination="@id/navigation_profile" />
     </fragment>
+
+    <fragment
+        android:id="@+id/navigation_transport"
+        android:name="com.example.peoplesontrol.ui.view.main.TransportTimetableFragment"
+        android:label="@string/title_transport"
+        tools:layout="@layout/fragment_transport_timetable" />
 
     <fragment
         android:id="@+id/navigation_profile"
@@ -62,5 +67,8 @@
         <action
             android:id="@+id/action_profileFragment_to_appealFragment"
             app:destination="@id/navigation_appeal" />
+        <action
+            android:id="@+id/action_profileFragment_to_archiveFragment"
+            app:destination="@id/navigation_archive" />
     </fragment>
 </navigation>

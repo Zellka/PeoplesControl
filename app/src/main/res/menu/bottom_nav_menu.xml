@@ -17,9 +17,9 @@
         android:title="@string/title_new_appeal" />
 
     <item
-        android:id="@+id/navigation_archive"
-        android:icon="@drawable/ic_archive_24"
-        android:title="@string/title_archive" />
+        android:id="@+id/navigation_transport"
+        android:icon="@drawable/ic_bus_24"
+        android:title="@string/title_transport" />
 
     <item
         android:id="@+id/navigation_profile"

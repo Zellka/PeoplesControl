@@ -94,6 +94,9 @@ class ArchiveFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val id = item.itemId
+        if (id == android.R.id.home) {
+            findNavController().navigate(R.id.action_archiveFragment_to_profileFragment)
+        }
         if (id == R.id.action_search) {
             val searchView = item.actionView as SearchView
             searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
