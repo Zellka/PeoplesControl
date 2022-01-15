@@ -48,11 +48,19 @@
         android:id="@+id/navigation_archive"
         android:name="com.example.peoplesontrol.ui.view.main.ArchiveFragment"
         android:label="@string/title_archive"
-        tools:layout="@layout/fragment_archive" />
+        tools:layout="@layout/fragment_archive">
+        <action
+            android:id="@+id/action_archiveFragment_to_appealFragment"
+            app:destination="@id/navigation_appeal" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_profile"
         android:name="com.example.peoplesontrol.ui.view.main.ProfileFragment"
         android:label="@string/title_profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile">
+        <action
+            android:id="@+id/action_profileFragment_to_appealFragment"
+            app:destination="@id/navigation_appeal" />
+    </fragment>
 </navigation>

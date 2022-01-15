@@ -19,4 +19,5 @@
     <string name="tab_name">Название</string>
     <string name="tab_rating">Рейтинг</string>
     <string name="tab_date">Дата</string>
+    <string name="title_my_appeals">Мои заявки</string>
 </resources>
