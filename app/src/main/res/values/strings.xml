@@ -2,6 +2,7 @@
     <string name="app_name">People\'s Сontrol</string>
     <string name="input_number">Номер</string>
     <string name="btn_ok">OK</string>
+    <string name="btn_send">Отправить</string>
     <string name="title_registration">Регистрация</string>
     <string name="input_password">Пароль</string>
     <string name="input_name">ФИО</string>
@@ -20,4 +21,8 @@
     <string name="tab_rating">Рейтинг</string>
     <string name="tab_date">Дата</string>
     <string name="title_my_appeals">Мои заявки</string>
+    <string name="input_description">Описание</string>
+    <string name="input_address">Адрес</string>
+    <string name="visible_name">Не отображать Ф.И.О.</string>
+    <string name="input_video">Ссылка на видео</string>
 </resources>
