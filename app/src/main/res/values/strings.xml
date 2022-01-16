@@ -30,4 +30,5 @@
     <string name="title_city">Выбор города</string>
     <string name="title_bus">Выбор маршрута</string>
     <string name="btn_check_timetable">Проверить расписание</string>
+    <string name="btn_add_appeal">Добавить к заявке</string>
 </resources>

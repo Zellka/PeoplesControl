@@ -42,12 +42,7 @@ class AppealAdapter(private var listener: (Appeal) -> Unit) :
             binding.nameAppeal.text = appeal.nameProblem
             binding.descriptionAppeal.text = appeal.description
             binding.addressAppeal.text = "Адрес: " + appeal.address
-            binding.coordinatesAppeal.text =
-                "Координаты: " + appeal.latitude + " " + appeal.longitude
-            binding.idAppeal.text = "№" + appeal.id.toString()
-            binding.numAppeals.text = appeal.numAppeal.toString() + " заявок"
             binding.dateAppeal.text = appeal.date
-            binding.statusAppeal.text = appeal.status
         }
     }
 
