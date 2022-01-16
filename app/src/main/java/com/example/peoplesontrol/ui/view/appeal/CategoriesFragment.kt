@@ -1,4 +1,4 @@
-package com.example.peoplesontrol.ui.view.main
+package com.example.peoplesontrol.ui.view.appeal
 
 import android.os.Bundle
 import android.view.*

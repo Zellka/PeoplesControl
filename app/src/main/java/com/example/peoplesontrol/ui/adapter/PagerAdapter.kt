@@ -5,7 +5,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import com.example.peoplesontrol.R
-import com.example.peoplesontrol.ui.view.main.SortAppealFragment
+import com.example.peoplesontrol.ui.view.appeal.AppealFragment
 
 private val TAB_TITLES = arrayOf(
     R.string.tab_number,
@@ -18,7 +18,7 @@ class PagerAdapter(private val context: Context, fm: FragmentManager) :
     FragmentPagerAdapter(fm) {
 
     override fun getItem(position: Int): Fragment {
-        return SortAppealFragment()
+        return AppealFragment()
     }
 
     override fun getPageTitle(position: Int): CharSequence? {

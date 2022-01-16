@@ -1,21 +1,21 @@
-package com.example.peoplesontrol.ui.view.main
+package com.example.peoplesontrol.ui.view.appeal
 
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
-import com.example.peoplesontrol.databinding.FragmentAppealsBinding
+import com.example.peoplesontrol.databinding.FragmentAllAppealsBinding
 import com.example.peoplesontrol.ui.adapter.PagerAdapter
 
-class AppealsFragment : Fragment() {
+class AllAppealsFragment : Fragment() {
 
-    private var _binding: FragmentAppealsBinding? = null
+    private var _binding: FragmentAllAppealsBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentAppealsBinding.inflate(inflater, container, false)
+        _binding = FragmentAllAppealsBinding.inflate(inflater, container, false)
         return binding.root
     }
 

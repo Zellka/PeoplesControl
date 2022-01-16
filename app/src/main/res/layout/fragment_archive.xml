@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.view.main.ArchiveFragment">
+    tools:context=".ui.view.profile.ArchiveFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_appeals"

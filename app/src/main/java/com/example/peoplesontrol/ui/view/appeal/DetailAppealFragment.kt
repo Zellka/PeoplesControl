@@ -1,23 +1,23 @@
-package com.example.peoplesontrol.ui.view.main
+package com.example.peoplesontrol.ui.view.appeal
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.peoplesontrol.databinding.FragmentNewAppealBinding
+import com.example.peoplesontrol.databinding.FragmentDetailAppealBinding
 import android.widget.ArrayAdapter
 
-class NewAppealFragment : Fragment() {
+class DetailAppealFragment : Fragment() {
 
-    private var _binding: FragmentNewAppealBinding? = null
+    private var _binding: FragmentDetailAppealBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentNewAppealBinding.inflate(inflater, container, false)
+        _binding = FragmentDetailAppealBinding.inflate(inflater, container, false)
         return binding.root
     }
 

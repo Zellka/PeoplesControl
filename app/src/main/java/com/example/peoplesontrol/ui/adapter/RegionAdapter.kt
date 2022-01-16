@@ -2,12 +2,18 @@ package com.example.peoplesontrol.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Filter
+import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
+import com.example.peoplesontrol.data.model.Appeal
 import com.example.peoplesontrol.databinding.ItemRegionBinding
+import java.util.*
+import kotlin.collections.ArrayList
 
 class RegionAdapter(private var listener: (String) -> Unit) :
-    RecyclerView.Adapter<RegionAdapter.RegionHolder>() {
+    RecyclerView.Adapter<RegionAdapter.RegionHolder>(), Filterable {
 
+    private var regionsFilter = mutableListOf<String>()
     private val regions = mutableListOf<String>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RegionAdapter.RegionHolder {
@@ -15,15 +21,15 @@ class RegionAdapter(private var listener: (String) -> Unit) :
         val viewHolder = RegionHolder(binding)
         viewHolder.itemView.setOnClickListener {
             if (viewHolder.adapterPosition != RecyclerView.NO_POSITION)
-                listener(regions[viewHolder.adapterPosition])
+                listener(regionsFilter[viewHolder.adapterPosition])
         }
         return viewHolder
     }
 
-    override fun getItemCount() = regions.size
+    override fun getItemCount() = regionsFilter.size
 
     override fun onBindViewHolder(holder: RegionHolder, position: Int) {
-        holder.bind(regions[position])
+        holder.bind(regionsFilter[position])
     }
 
     inner class RegionHolder(var binding: ItemRegionBinding) :
@@ -34,8 +40,39 @@ class RegionAdapter(private var listener: (String) -> Unit) :
     }
 
     fun setData(newData: List<String>) {
-        regions.clear()
-        regions.addAll(newData)
+        regionsFilter.clear()
+        regionsFilter.addAll(newData)
+        regions.addAll(regionsFilter)
         notifyDataSetChanged()
+    }
+
+    override fun getFilter(): Filter {
+        return object : Filter() {
+            override fun performFiltering(constraint: CharSequence?): FilterResults {
+                val charSearch = constraint.toString()
+                if (charSearch.isEmpty()) {
+                    regionsFilter = regions
+                } else {
+                    val resultList: MutableList<String> = ArrayList()
+                    for (row in regions) {
+                        if (row.toLowerCase(Locale.ROOT)
+                                .contains(charSearch.toLowerCase(Locale.ROOT))
+                        ) {
+                            resultList.add(row)
+                        }
+                    }
+                    regionsFilter = resultList
+                }
+                val filterResults = FilterResults()
+                filterResults.values = regionsFilter
+                return filterResults
+            }
+
+            @Suppress("UNCHECKED_CAST")
+            override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
+                regionsFilter = results?.values as MutableList<String>
+                notifyDataSetChanged()
+            }
+        }
     }
 }

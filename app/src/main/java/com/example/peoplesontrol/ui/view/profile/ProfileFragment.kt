@@ -1,4 +1,4 @@
-package com.example.peoplesontrol.ui.view.main
+package com.example.peoplesontrol.ui.view.profile
 
 import android.os.Bundle
 import android.view.*
@@ -8,12 +8,12 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.peoplesontrol.R
 import com.example.peoplesontrol.data.model.Appeal
-import com.example.peoplesontrol.databinding.AppealBinding
+import com.example.peoplesontrol.databinding.FragmentProfileBinding
 import com.example.peoplesontrol.ui.adapter.AppealAdapter
 
-class SortAppealFragment: Fragment() {
+class ProfileFragment : Fragment() {
 
-    private var _binding: AppealBinding? = null
+    private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
 
     private lateinit var adapter: AppealAdapter
@@ -27,15 +27,15 @@ class SortAppealFragment: Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = AppealBinding.inflate(inflater, container, false)
+        _binding = FragmentProfileBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val list = listOf(
             Appeal(
-                123,
-                "Иванов Иван Иванович",
+                131,
+                "Петрова Ольга Николаевна",
                 "Авария",
                 "г.Донецк, ул.Артёма, 66",
                 "53",
@@ -48,8 +48,8 @@ class SortAppealFragment: Fragment() {
                 14
             ),
             Appeal(
-                124,
-                "Петров Иван Иванович",
+                146,
+                "Петрова Ольга Николаевна",
                 "Авария",
                 "г.Донецк, ул.Артёма, 66",
                 "53",
@@ -58,36 +58,8 @@ class SortAppealFragment: Fragment() {
                 "",
                 "14.01.22",
                 "Большая авария, 2 машины, 1 пострадавший",
-                0,
+                4,
                 1
-            ),
-            Appeal(
-                125,
-                "Иванов Василия Иванович",
-                "Авария",
-                "г.Донецк, ул.Артёма, 66",
-                "53",
-                "26",
-                "В обработке",
-                "",
-                "14.01.22",
-                "Большая авария, 2 машины, 1 пострадавший",
-                0,
-                15
-            ),
-            Appeal(
-                126,
-                "Иванов Юрий Иванович",
-                "Авария",
-                "г.Донецк, ул.Артёма, 66",
-                "53",
-                "26",
-                "В обработке",
-                "",
-                "14.01.22",
-                "Большая авария, 2 машины, 1 пострадавший",
-                0,
-                24
             )
         )
 
@@ -96,32 +68,20 @@ class SortAppealFragment: Fragment() {
         adapter.setData(list)
         binding.rvAppeals.adapter = adapter
     }
+
     private fun showAppeal(appeal: Appeal) {
-        findNavController().navigate(R.id.action_appealsFragment_to_appealFragment)
+        findNavController().navigate(R.id.action_profileFragment_to_appealFragment)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.search_menu, menu)
+        inflater.inflate(R.menu.archive_menu, menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val id = item.itemId
-        if (id == android.R.id.home){
-            findNavController().navigate(R.id.action_appealsFragment_to_categoriesFragment)
-        }
-        if (id == R.id.action_search) {
-            val searchView = item.actionView as SearchView
-            searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-                override fun onQueryTextSubmit(p0: String?): Boolean {
-                    return true
-                }
-
-                override fun onQueryTextChange(query: String?): Boolean {
-                    adapter.filter.filter(query)
-                    return true
-                }
-            })
+        if (id == R.id.action_archive) {
+            findNavController().navigate((R.id.action_profileFragment_to_archiveFragment))
         }
         return super.onOptionsItemSelected(item)
     }

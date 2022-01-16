@@ -3,15 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/login_navigation"
-    app:startDestination="@id/navigation_regions">
+    app:startDestination="@id/navigation_select_region">
 
     <fragment
-        android:id="@+id/navigation_regions"
-        android:name="com.example.peoplesontrol.ui.view.login.RegionsFragment"
+        android:id="@+id/navigation_select_region"
+        android:name="com.example.peoplesontrol.ui.view.login.SelectRegionFragment"
         android:label="@string/title_region"
-        tools:layout="@layout/fragment_regions">
+        tools:layout="@layout/fragment_select_region">
         <action
-            android:id="@+id/action_regionsFragment_to_loginFragment"
+            android:id="@+id/action_regionFragment_to_loginFragment"
             app:destination="@id/navigation_login" />
     </fragment>
 
@@ -24,9 +24,10 @@
             android:id="@+id/action_loginFragment_to_registrationFragment"
             app:destination="@id/navigation_registration" />
         <action
-            android:id="@+id/action_loginFragment_to_regionsFragment"
-            app:destination="@id/navigation_regions" />
+            android:id="@+id/action_loginFragment_to_regionFragment"
+            app:destination="@id/navigation_select_region" />
     </fragment>
+
     <fragment
         android:id="@+id/navigation_registration"
         android:name="com.example.peoplesontrol.ui.view.login.RegistrationFragment"

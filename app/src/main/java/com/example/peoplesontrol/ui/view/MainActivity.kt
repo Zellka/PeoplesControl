@@ -1,4 +1,4 @@
-package com.example.peoplesontrol.ui.view.main
+package com.example.peoplesontrol.ui.view
 
 import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -25,8 +25,8 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
         val appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.navigation_categories, R.id.navigation_map, R.id.navigation_appeal,
-                R.id.navigation_transport, R.id.navigation_profile
+                R.id.navigation_categories, R.id.navigation_map, R.id.navigation_detail_appeal,
+                R.id.navigation_city, R.id.navigation_profile
             )
         )
         setupActionBarWithNavController(navController, appBarConfiguration)

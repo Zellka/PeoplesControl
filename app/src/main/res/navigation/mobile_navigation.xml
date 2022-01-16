@@ -7,22 +7,22 @@
 
     <fragment
         android:id="@+id/navigation_categories"
-        android:name="com.example.peoplesontrol.ui.view.main.CategoriesFragment"
+        android:name="com.example.peoplesontrol.ui.view.appeal.CategoriesFragment"
         android:label="@string/title_categories"
         tools:layout="@layout/fragment_categories">
         <action
             android:id="@+id/action_categoriesFragment_to_appealsFragment"
-            app:destination="@id/navigation_appeals" />
+            app:destination="@id/navigation_all_appeals" />
     </fragment>
 
     <fragment
-        android:id="@+id/navigation_appeals"
-        android:name="com.example.peoplesontrol.ui.view.main.AppealsFragment"
+        android:id="@+id/navigation_all_appeals"
+        android:name="com.example.peoplesontrol.ui.view.appeal.AllAppealsFragment"
         android:label="@string/title_appeals"
-        tools:layout="@layout/fragment_appeals">
+        tools:layout="@layout/fragment_all_appeals">
         <action
             android:id="@+id/action_appealsFragment_to_appealFragment"
-            app:destination="@id/navigation_appeal" />
+            app:destination="@id/navigation_detail_appeal" />
         <action
             android:id="@+id/action_appealsFragment_to_categoriesFragment"
             app:destination="@id/navigation_categories" />
@@ -30,24 +30,24 @@
 
     <fragment
         android:id="@+id/navigation_map"
-        android:name="com.example.peoplesontrol.ui.view.main.MapFragment"
+        android:name="com.example.peoplesontrol.ui.view.map.AllMapFragment"
         android:label="@string/title_map"
-        tools:layout="@layout/fragment_map" />
+        tools:layout="@layout/fragment_all_map" />
 
     <fragment
-        android:id="@+id/navigation_appeal"
-        android:name="com.example.peoplesontrol.ui.view.main.NewAppealFragment"
+        android:id="@+id/navigation_detail_appeal"
+        android:name="com.example.peoplesontrol.ui.view.appeal.DetailAppealFragment"
         android:label="@string/title_new_appeal"
-        tools:layout="@layout/fragment_new_appeal" />
+        tools:layout="@layout/fragment_detail_appeal" />
 
     <fragment
         android:id="@+id/navigation_archive"
-        android:name="com.example.peoplesontrol.ui.view.main.ArchiveFragment"
+        android:name="com.example.peoplesontrol.ui.view.profile.ArchiveFragment"
         android:label="@string/title_archive"
         tools:layout="@layout/fragment_archive">
         <action
             android:id="@+id/action_archiveFragment_to_appealFragment"
-            app:destination="@id/navigation_appeal" />
+            app:destination="@id/navigation_detail_appeal" />
         <action
             android:id="@+id/action_archiveFragment_to_profileFragment"
             app:destination="@id/navigation_profile" />
@@ -55,18 +55,45 @@
 
     <fragment
         android:id="@+id/navigation_transport"
-        android:name="com.example.peoplesontrol.ui.view.main.TransportTimetableFragment"
+        android:name="com.example.peoplesontrol.ui.view.transport.TimetableFragment"
         android:label="@string/title_transport"
-        tools:layout="@layout/fragment_transport_timetable" />
+        tools:layout="@layout/fragment_timetable">
+        <action
+            android:id="@+id/action_transportFragment_to_busFragment"
+            app:destination="@id/navigation_bus" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_city"
+        android:name="com.example.peoplesontrol.ui.view.transport.SelectCityFragment"
+        android:label="@string/title_city"
+        tools:layout="@layout/fragment_select_city">
+        <action
+            android:id="@+id/action_cityFragment_to_busFragment"
+            app:destination="@id/navigation_bus" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_bus"
+        android:name="com.example.peoplesontrol.ui.view.transport.SelectBusFragment"
+        android:label="@string/title_bus"
+        tools:layout="@layout/fragment_select_bus">
+        <action
+            android:id="@+id/action_busFragment_to_transportFragment"
+            app:destination="@id/navigation_transport" />
+        <action
+            android:id="@+id/action_busFragment_to_cityFragment"
+            app:destination="@id/navigation_city" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_profile"
-        android:name="com.example.peoplesontrol.ui.view.main.ProfileFragment"
+        android:name="com.example.peoplesontrol.ui.view.profile.ProfileFragment"
         android:label="@string/title_profile"
         tools:layout="@layout/fragment_profile">
         <action
             android:id="@+id/action_profileFragment_to_appealFragment"
-            app:destination="@id/navigation_appeal" />
+            app:destination="@id/navigation_detail_appeal" />
         <action
             android:id="@+id/action_profileFragment_to_archiveFragment"
             app:destination="@id/navigation_archive" />

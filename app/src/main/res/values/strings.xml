@@ -27,4 +27,7 @@
     <string name="input_video">Ссылка на видео</string>
     <string name="title_transport">Расписание транспорта</string>
     <string name="google_maps_key">api_key</string>
+    <string name="title_city">Выбор города</string>
+    <string name="title_bus">Выбор маршрута</string>
+    <string name="btn_check_timetable">Проверить расписание</string>
 </resources>

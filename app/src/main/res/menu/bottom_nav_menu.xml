@@ -12,14 +12,14 @@
         android:title="@string/title_map" />
 
     <item
-        android:id="@+id/navigation_appeal"
+        android:id="@+id/navigation_detail_appeal"
         android:icon="@drawable/ic_add_24"
         android:title="@string/title_new_appeal" />
 
     <item
-        android:id="@+id/navigation_transport"
+        android:id="@+id/navigation_city"
         android:icon="@drawable/ic_bus_24"
-        android:title="@string/title_transport" />
+        android:title="@string/title_city" />
 
     <item
         android:id="@+id/navigation_profile"

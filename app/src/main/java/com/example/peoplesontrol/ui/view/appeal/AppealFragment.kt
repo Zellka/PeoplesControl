@@ -1,4 +1,4 @@
-package com.example.peoplesontrol.ui.view.main
+package com.example.peoplesontrol.ui.view.appeal
 
 import android.os.Bundle
 import android.view.*
@@ -8,12 +8,12 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.peoplesontrol.R
 import com.example.peoplesontrol.data.model.Appeal
-import com.example.peoplesontrol.databinding.FragmentArchiveBinding
+import com.example.peoplesontrol.databinding.FragmentAppealBinding
 import com.example.peoplesontrol.ui.adapter.AppealAdapter
 
-class ArchiveFragment : Fragment() {
+class AppealFragment : Fragment() {
 
-    private var _binding: FragmentArchiveBinding? = null
+    private var _binding: FragmentAppealBinding? = null
     private val binding get() = _binding!!
 
     private lateinit var adapter: AppealAdapter
@@ -27,53 +27,67 @@ class ArchiveFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentArchiveBinding.inflate(inflater, container, false)
+        _binding = FragmentAppealBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val list = listOf(
             Appeal(
-                11,
-                "Петрова Ольга Николаевна",
+                123,
+                "Иванов Иван Иванович",
                 "Авария",
                 "г.Донецк, ул.Артёма, 66",
                 "53",
                 "26",
-                "Выполнено",
+                "В обработке",
                 "",
                 "14.01.22",
                 "Большая авария, 2 машины, 1 пострадавший",
-                10,
+                0,
                 14
             ),
             Appeal(
-                16,
-                "Петрова Ольга Николаевна",
+                124,
+                "Петров Иван Иванович",
                 "Авария",
                 "г.Донецк, ул.Артёма, 66",
                 "53",
                 "26",
-                "Выполнено",
+                "В обработке",
                 "",
                 "14.01.22",
                 "Большая авария, 2 машины, 1 пострадавший",
-                15,
+                0,
                 1
             ),
             Appeal(
-                19,
-                "Петрова Ольга Николаевна",
+                125,
+                "Иванов Василия Иванович",
                 "Авария",
                 "г.Донецк, ул.Артёма, 66",
                 "53",
                 "26",
-                "Выполнено",
+                "В обработке",
                 "",
                 "14.01.22",
                 "Большая авария, 2 машины, 1 пострадавший",
-                5,
-                1
+                0,
+                15
+            ),
+            Appeal(
+                126,
+                "Иванов Юрий Иванович",
+                "Авария",
+                "г.Донецк, ул.Артёма, 66",
+                "53",
+                "26",
+                "В обработке",
+                "",
+                "14.01.22",
+                "Большая авария, 2 машины, 1 пострадавший",
+                0,
+                24
             )
         )
 
@@ -84,7 +98,7 @@ class ArchiveFragment : Fragment() {
     }
 
     private fun showAppeal(appeal: Appeal) {
-        findNavController().navigate(R.id.action_archiveFragment_to_appealFragment)
+        findNavController().navigate(R.id.action_appealsFragment_to_appealFragment)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -95,7 +109,7 @@ class ArchiveFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val id = item.itemId
         if (id == android.R.id.home) {
-            findNavController().navigate(R.id.action_archiveFragment_to_profileFragment)
+            findNavController().navigate(R.id.action_appealsFragment_to_categoriesFragment)
         }
         if (id == R.id.action_search) {
             val searchView = item.actionView as SearchView

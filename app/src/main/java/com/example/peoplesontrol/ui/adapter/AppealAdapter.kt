@@ -6,7 +6,6 @@ import android.widget.Filter
 import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
 import com.example.peoplesontrol.data.model.Appeal
-import com.example.peoplesontrol.data.model.Category
 import com.example.peoplesontrol.databinding.ItemAppealBinding
 import java.util.*
 import kotlin.collections.ArrayList

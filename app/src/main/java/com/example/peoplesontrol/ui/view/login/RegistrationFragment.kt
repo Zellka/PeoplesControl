@@ -10,7 +10,7 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.example.peoplesontrol.R
 import com.example.peoplesontrol.databinding.FragmentRegistrationBinding
-import com.example.peoplesontrol.ui.view.main.MainActivity
+import com.example.peoplesontrol.ui.view.MainActivity
 
 class RegistrationFragment : Fragment() {
 

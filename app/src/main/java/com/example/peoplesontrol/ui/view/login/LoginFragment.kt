@@ -10,7 +10,7 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.example.peoplesontrol.R
 import com.example.peoplesontrol.databinding.FragmentLoginBinding
-import com.example.peoplesontrol.ui.view.main.MainActivity
+import com.example.peoplesontrol.ui.view.MainActivity
 
 class LoginFragment : Fragment() {
 
@@ -43,7 +43,7 @@ class LoginFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             android.R.id.home -> {
-                findNavController().navigate(R.id.action_loginFragment_to_regionsFragment)
+                findNavController().navigate(R.id.action_loginFragment_to_regionFragment)
                 true
             }
             else -> super.onOptionsItemSelected(item)

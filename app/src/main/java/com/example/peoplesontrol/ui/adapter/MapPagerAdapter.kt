@@ -3,7 +3,7 @@ package com.example.peoplesontrol.ui.adapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import com.example.peoplesontrol.ui.view.main.MapCategoryFragment
+import com.example.peoplesontrol.ui.view.map.MapFragment
 
 private val TAB_TITLES = arrayOf(
     "Все",
@@ -19,7 +19,7 @@ class MapPagerAdapter(fm: FragmentManager) :
     FragmentPagerAdapter(fm) {
 
     override fun getItem(position: Int): Fragment {
-        return MapCategoryFragment()
+        return MapFragment()
     }
 
     override fun getPageTitle(position: Int): CharSequence? {

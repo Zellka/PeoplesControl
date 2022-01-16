@@ -1,4 +1,4 @@
-package com.example.peoplesontrol.ui.view.main
+package com.example.peoplesontrol.ui.view.profile
 
 import android.os.Bundle
 import android.view.*
@@ -8,12 +8,12 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.peoplesontrol.R
 import com.example.peoplesontrol.data.model.Appeal
-import com.example.peoplesontrol.databinding.FragmentProfileBinding
+import com.example.peoplesontrol.databinding.FragmentArchiveBinding
 import com.example.peoplesontrol.ui.adapter.AppealAdapter
 
-class ProfileFragment : Fragment() {
+class ArchiveFragment : Fragment() {
 
-    private var _binding: FragmentProfileBinding? = null
+    private var _binding: FragmentArchiveBinding? = null
     private val binding get() = _binding!!
 
     private lateinit var adapter: AppealAdapter
@@ -27,38 +27,52 @@ class ProfileFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentProfileBinding.inflate(inflater, container, false)
+        _binding = FragmentArchiveBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val list = listOf(
             Appeal(
-                131,
+                11,
                 "Петрова Ольга Николаевна",
                 "Авария",
                 "г.Донецк, ул.Артёма, 66",
                 "53",
                 "26",
-                "В обработке",
+                "Выполнено",
                 "",
                 "14.01.22",
                 "Большая авария, 2 машины, 1 пострадавший",
-                0,
+                10,
                 14
             ),
             Appeal(
-                146,
+                16,
                 "Петрова Ольга Николаевна",
                 "Авария",
                 "г.Донецк, ул.Артёма, 66",
                 "53",
                 "26",
-                "В обработке",
+                "Выполнено",
                 "",
                 "14.01.22",
                 "Большая авария, 2 машины, 1 пострадавший",
-                4,
+                15,
+                1
+            ),
+            Appeal(
+                19,
+                "Петрова Ольга Николаевна",
+                "Авария",
+                "г.Донецк, ул.Артёма, 66",
+                "53",
+                "26",
+                "Выполнено",
+                "",
+                "14.01.22",
+                "Большая авария, 2 машины, 1 пострадавший",
+                5,
                 1
             )
         )
@@ -70,18 +84,31 @@ class ProfileFragment : Fragment() {
     }
 
     private fun showAppeal(appeal: Appeal) {
-        findNavController().navigate(R.id.action_profileFragment_to_appealFragment)
+        findNavController().navigate(R.id.action_archiveFragment_to_appealFragment)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.archive_menu, menu)
+        inflater.inflate(R.menu.search_menu, menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val id = item.itemId
-        if (id == R.id.action_archive) {
-            findNavController().navigate((R.id.action_profileFragment_to_archiveFragment))
+        if (id == android.R.id.home) {
+            findNavController().navigate(R.id.action_archiveFragment_to_profileFragment)
+        }
+        if (id == R.id.action_search) {
+            val searchView = item.actionView as SearchView
+            searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+                override fun onQueryTextSubmit(p0: String?): Boolean {
+                    return true
+                }
+
+                override fun onQueryTextChange(query: String?): Boolean {
+                    adapter.filter.filter(query)
+                    return true
+                }
+            })
         }
         return super.onOptionsItemSelected(item)
     }
