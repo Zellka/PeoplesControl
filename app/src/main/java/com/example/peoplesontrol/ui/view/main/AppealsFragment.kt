@@ -10,6 +10,7 @@ class AppealsFragment : Fragment() {
 
     private var _binding: FragmentAppealsBinding? = null
     private val binding get() = _binding!!
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

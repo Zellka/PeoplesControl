@@ -26,4 +26,5 @@
     <string name="visible_name">Не отображать Ф.И.О.</string>
     <string name="input_video">Ссылка на видео</string>
     <string name="title_transport">Расписание транспорта</string>
+    <string name="google_maps_key">api_key</string>
 </resources>
