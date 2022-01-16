@@ -48,7 +48,7 @@ class TimetableFragment : Fragment(), OnMapReadyCallback {
         val directions =
             arrayOf(
                 "Прямое",
-                "Обратно"
+                "Обратное"
             )
         val adapterDirections: ArrayAdapter<String> =
             ArrayAdapter(this.requireContext(), android.R.layout.simple_spinner_item, directions)
@@ -83,6 +83,10 @@ class TimetableFragment : Fragment(), OnMapReadyCallback {
                 cal.get(Calendar.MINUTE),
                 true
             ).show()
+        }
+        binding.btnCheckTimetable.setOnClickListener {
+            binding.titleTime.visibility = View.VISIBLE
+            binding.timeStation.text = SimpleDateFormat("HH:mm").format(cal.time)
         }
     }
 
