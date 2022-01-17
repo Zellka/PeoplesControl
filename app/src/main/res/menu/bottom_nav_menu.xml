@@ -3,27 +3,27 @@
 
     <item
         android:id="@+id/navigation_categories"
-        android:icon="@drawable/ic_category_24"
+        android:icon="@drawable/ic_category"
         android:title="@string/title_categories" />
 
     <item
         android:id="@+id/navigation_map"
-        android:icon="@drawable/ic_map_24"
+        android:icon="@drawable/ic_map"
         android:title="@string/title_map" />
 
     <item
         android:id="@+id/navigation_detail_appeal"
-        android:icon="@drawable/ic_add_24"
+        android:icon="@drawable/ic_plus"
         android:title="@string/title_new_appeal" />
 
     <item
         android:id="@+id/navigation_city"
-        android:icon="@drawable/ic_bus_24"
+        android:icon="@drawable/ic_bus"
         android:title="@string/title_city" />
 
     <item
         android:id="@+id/navigation_profile"
-        android:icon="@drawable/ic_profile_24"
+        android:icon="@drawable/ic_profile"
         android:title="@string/title_profile" />
 
 </menu>

@@ -18,6 +18,8 @@ ext {
     materialVersion = '1.5.0'
     navigationVersion = '2.3.5'
     lifecycleVersion = '2.4.0'
+    mapVersion = '18.0.2'
+    maskedEditTextVersion = '1.0.5'
 }
 
 task clean(type: Delete) {

@@ -35,7 +35,7 @@ class RegionAdapter(private var listener: (String) -> Unit) :
     inner class RegionHolder(var binding: ItemRegionBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(region: String) {
-            binding.region.text = region
+            binding.item.text = region
         }
     }
 

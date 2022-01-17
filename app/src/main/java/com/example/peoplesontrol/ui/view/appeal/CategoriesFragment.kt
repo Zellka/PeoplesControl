@@ -35,18 +35,18 @@ class CategoriesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val list = listOf(
-            Category("", "состояние дорог и прилегающих территорий", 5),
-            Category("", "состояние благоустройства города", 25),
-            Category("", "постройки в аварийном состоянии", 61),
-            Category("", "уборка территорий и вывоз отходов", 17),
-            Category("", "скопление животных", 23),
-            Category("", "некачественные товары", 4),
-            Category("", "проявления вандализма", 46),
-            Category("", "нарушение КЗОТ", 2),
-            Category("", "нарушение ПДД", 4),
-            Category("", "скопление криминальных элементов", 2),
-            Category("", "прорывы коммуникаций", 41),
-            Category("", "расписание транспорта", 2)
+            Category("", "Состояние дорог и прилегающих территорий", 5),
+            Category("", "Состояние благоустройства города", 25),
+            Category("", "Постройки в аварийном состоянии", 61),
+            Category("", "Уборка территорий и вывоз отходов", 17),
+            Category("", "Скопление животных", 23),
+            Category("", "Некачественные товары", 4),
+            Category("", "Проявления вандализма", 46),
+            Category("", "Нарушение КЗОТ", 2),
+            Category("", "Нарушение ПДД", 4),
+            Category("", "Скопление криминальных элементов", 2),
+            Category("", "Прорывы коммуникаций", 41),
+            Category("", "Расписание транспорта", 2)
         )
 
         binding.rvCategories.layoutManager = GridLayoutManager(this.requireContext(), 2)
