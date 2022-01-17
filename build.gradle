@@ -19,7 +19,9 @@ ext {
     navigationVersion = '2.3.5'
     lifecycleVersion = '2.4.0'
     mapVersion = '18.0.2'
+    locationVersion = '19.0.1'
     maskedEditTextVersion = '1.0.5'
+    circleImageViewVersion = '3.1.0'
 }
 
 task clean(type: Delete) {

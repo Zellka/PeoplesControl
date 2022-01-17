@@ -1,13 +1,13 @@
 <resources>
-    <string name="app_name">People\'s Сontrol</string>
+    <string name="app_name">Народный контроль</string>
     <string name="input_number">Номер</string>
     <string name="btn_ok">OK</string>
     <string name="btn_send">Отправить</string>
     <string name="title_registration">Регистрация</string>
     <string name="input_password">Пароль</string>
-    <string name="input_name">ФИО</string>
+    <string name="input_name">Ф.И.О.</string>
     <string name="input_email">Email</string>
-    <string name="title_region">Выбор региона</string>
+    <string name="title_city">Выберите город</string>
     <string name="title_login">Вход</string>
     <string name="title_no_auth"><u>Зарегистрироваться</u></string>
     <string name="title_categories">Сферы</string>
@@ -20,15 +20,16 @@
     <string name="tab_name">Название</string>
     <string name="tab_rating">Рейтинг</string>
     <string name="tab_date">Дата</string>
-    <string name="title_my_appeals">Мои заявки</string>
+    <string name="title_my_appeals"><u>Мои заявки</u></string>
     <string name="input_description">Описание</string>
     <string name="input_address">Адрес</string>
     <string name="visible_name">Не отображать Ф.И.О.</string>
     <string name="input_video">Ссылка на видео</string>
     <string name="title_transport">Расписание транспорта</string>
     <string name="google_maps_key">api_key</string>
-    <string name="title_city">Выбор города</string>
-    <string name="title_bus">Выбор маршрута</string>
+    <string name="title_bus">Выберите маршрут</string>
     <string name="btn_check_timetable">Проверить расписание</string>
     <string name="btn_add_appeal">Добавить к заявке</string>
+    <string name="input_error">Обязательно поле</string>
+    <string name="title_setting">Настройки</string>
 </resources>

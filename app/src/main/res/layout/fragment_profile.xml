@@ -4,46 +4,65 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginTop="20dp"
+    android:paddingBottom="?attr/actionBarSize"
     tools:context=".ui.view.profile.ProfileFragment">
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/user_photo"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:src="@color/teal_200"
+        android:layout_width="96dp"
+        android:layout_height="96dp"
+        android:src="@drawable/img"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/user_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:maxLines="2"
+        android:paddingTop="10dp"
         android:text="Петрова Ольга Николаевна"
-        app:layout_constraintLeft_toRightOf="@+id/user_photo"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/user_photo"
         tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/user_number"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="(071)998-87-54"
-        app:layout_constraintLeft_toRightOf="@+id/user_photo"
-        app:layout_constraintTop_toBottomOf="@+id/user_name"
-        tools:ignore="MissingConstraints" />
+        android:paddingTop="5dp"
+        android:paddingBottom="10dp"
+        android:text="(071) 998-87-54"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/user_name" />
 
     <TextView
         android:id="@+id/title_appeals"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingStart="15dp"
+        android:paddingTop="15dp"
         android:text="@string/title_my_appeals"
-        app:layout_constraintTop_toBottomOf="@+id/user_photo"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@+id/user_number"
         tools:ignore="MissingConstraints" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_appeals"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:layout_height="0dp"
+        android:layout_margin="5dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title_appeals"
         tools:listitem="@layout/item_appeal" />
 

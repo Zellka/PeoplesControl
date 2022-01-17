@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/navigation_select_region"
         android:name="com.example.peoplesontrol.ui.view.login.SelectRegionFragment"
-        android:label="@string/title_region"
+        android:label="@string/title_city"
         tools:layout="@layout/fragment_select_region">
         <action
             android:id="@+id/action_regionFragment_to_loginFragment"

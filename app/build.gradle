@@ -45,5 +45,7 @@ dependencies {
     implementation "androidx.navigation:navigation-fragment-ktx:$navigationVersion"
     implementation "androidx.navigation:navigation-ui-ktx:$navigationVersion"
     implementation "com.google.android.gms:play-services-maps:$mapVersion"
+    implementation "com.google.android.gms:play-services-location:$locationVersion"
     implementation "ru.egslava:MaskedEditText:$maskedEditTextVersion"
+    implementation "de.hdodenhof:circleimageview:$circleImageViewVersion"
 }

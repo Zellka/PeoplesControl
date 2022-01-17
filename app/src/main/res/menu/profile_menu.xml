@@ -6,4 +6,9 @@
         android:icon="@drawable/ic_archive"
         android:title="@string/title_archive"
         app:showAsAction="always" />
+    <item
+        android:id="@+id/action_setting"
+        android:icon="@drawable/ic_setting"
+        android:title="@string/title_setting"
+        app:showAsAction="always" />
 </menu>

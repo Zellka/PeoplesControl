@@ -33,8 +33,8 @@ class MapFragment : Fragment(), OnMapReadyCallback {
         p0.addMarker(
             MarkerOptions()
                 .position(LatLng(47.9917, 37.7759))
-                .title("Marker")
+                .title("Donetsk")
         )
-        p0.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(47.9917, 37.7759), 12f))
+        p0.moveCamera(CameraUpdateFactory.newLatLng(LatLng(47.9917, 37.7759)))
     }
 }
