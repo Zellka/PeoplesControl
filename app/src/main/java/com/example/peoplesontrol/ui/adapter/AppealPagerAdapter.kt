@@ -14,7 +14,7 @@ private val TAB_TITLES = arrayOf(
     R.string.tab_date
 )
 
-class PagerAdapter(private val context: Context, fm: FragmentManager) :
+class AppealPagerAdapter(private val context: Context, fm: FragmentManager) :
     FragmentPagerAdapter(fm) {
 
     override fun getItem(position: Int): Fragment {

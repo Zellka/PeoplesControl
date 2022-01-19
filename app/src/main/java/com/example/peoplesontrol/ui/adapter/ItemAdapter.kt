@@ -5,20 +5,19 @@ import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
-import com.example.peoplesontrol.data.model.Appeal
 import com.example.peoplesontrol.databinding.ItemRegionBinding
 import java.util.*
 import kotlin.collections.ArrayList
 
-class RegionAdapter(private var listener: (String) -> Unit) :
-    RecyclerView.Adapter<RegionAdapter.RegionHolder>(), Filterable {
+class ItemAdapter(private var listener: (String) -> Unit) :
+    RecyclerView.Adapter<ItemAdapter.ItemHolder>(), Filterable {
 
     private var regionsFilter = mutableListOf<String>()
     private val regions = mutableListOf<String>()
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RegionAdapter.RegionHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemAdapter.ItemHolder {
         val binding = ItemRegionBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        val viewHolder = RegionHolder(binding)
+        val viewHolder = ItemHolder(binding)
         viewHolder.itemView.setOnClickListener {
             if (viewHolder.adapterPosition != RecyclerView.NO_POSITION)
                 listener(regionsFilter[viewHolder.adapterPosition])
@@ -28,11 +27,11 @@ class RegionAdapter(private var listener: (String) -> Unit) :
 
     override fun getItemCount() = regionsFilter.size
 
-    override fun onBindViewHolder(holder: RegionHolder, position: Int) {
+    override fun onBindViewHolder(holder: ItemHolder, position: Int) {
         holder.bind(regionsFilter[position])
     }
 
-    inner class RegionHolder(var binding: ItemRegionBinding) :
+    inner class ItemHolder(var binding: ItemRegionBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(region: String) {
             binding.item.text = region

@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import com.example.peoplesontrol.databinding.FragmentAllAppealsBinding
-import com.example.peoplesontrol.ui.adapter.PagerAdapter
+import com.example.peoplesontrol.ui.adapter.AppealPagerAdapter
 
 class AllAppealsFragment : Fragment() {
 
@@ -20,7 +20,7 @@ class AllAppealsFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        binding.viewPager.adapter = PagerAdapter(this.requireContext(), childFragmentManager)
+        binding.viewPager.adapter = AppealPagerAdapter(this.requireContext(), childFragmentManager)
         binding.tabLayout.setupWithViewPager(binding.viewPager)
     }
 }

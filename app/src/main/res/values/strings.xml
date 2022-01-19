@@ -43,4 +43,7 @@
     <string name="title_video">Видео:</string>
     <string name="title_edit_profile">Редактировать</string>
     <string name="title_num_appeal">Количество заявок:</string>
+    <string name="input_house">Дом</string>
+    <string name="input_street">Улица</string>
+    <string name="input_city">Город</string>
 </resources>

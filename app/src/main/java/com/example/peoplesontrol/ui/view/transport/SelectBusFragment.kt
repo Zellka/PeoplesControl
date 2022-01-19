@@ -8,14 +8,14 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.peoplesontrol.R
 import com.example.peoplesontrol.databinding.FragmentSelectBusBinding
-import com.example.peoplesontrol.ui.adapter.RegionAdapter
+import com.example.peoplesontrol.ui.adapter.ItemAdapter
 
 class SelectBusFragment : Fragment() {
 
     private var _binding: FragmentSelectBusBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var adapter: RegionAdapter
+    private lateinit var adapter: ItemAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,7 +36,7 @@ class SelectBusFragment : Fragment() {
             listOf("Маршрут № 8", "Маршрут № 19", "Маршрут № 26", "Маршрут № 32", "Маршрут № 41")
 
         binding.rvBus.layoutManager = LinearLayoutManager(this.requireContext())
-        adapter = RegionAdapter { bus: String -> nextLogin(bus) }
+        adapter = ItemAdapter { bus: String -> nextLogin(bus) }
         adapter.setData(list)
         binding.rvBus.adapter = adapter
     }

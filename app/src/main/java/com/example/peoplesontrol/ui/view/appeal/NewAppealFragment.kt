@@ -78,8 +78,10 @@ class NewAppealFragment : Fragment() {
         }
         binding.btnSend.setOnClickListener {
             val geocoder = Geocoder(this.requireContext(), Locale.getDefault())
+            val currentAddress =
+                binding.editCity.text.toString() + " " + binding.editStreet.text.toString() + " " + binding.editHouse.text.toString()
             val addresses: List<Address> =
-                geocoder.getFromLocationName(binding.editAddress.text.toString(), 1)
+                geocoder.getFromLocationName(currentAddress, 1)
             val address: Address = addresses[0]
             val longitude: Double = address.longitude
             val latitude: Double = address.latitude

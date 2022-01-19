@@ -8,14 +8,14 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.peoplesontrol.R
 import com.example.peoplesontrol.databinding.FragmentSelectCityBinding
-import com.example.peoplesontrol.ui.adapter.RegionAdapter
+import com.example.peoplesontrol.ui.adapter.ItemAdapter
 
 class SelectCityFragment : Fragment() {
 
     private var _binding: FragmentSelectCityBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var adapter: RegionAdapter
+    private lateinit var adapter: ItemAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,7 +35,7 @@ class SelectCityFragment : Fragment() {
         val list = listOf("Донецк", "Макеевка", "Ясиноватая", "Горловка", "Шахтёрск")
 
         binding.rvCities.layoutManager = LinearLayoutManager(this.requireContext())
-        adapter = RegionAdapter { city: String -> nextLogin(city) }
+        adapter = ItemAdapter { city: String -> nextLogin(city) }
         adapter.setData(list)
         binding.rvCities.adapter = adapter
     }

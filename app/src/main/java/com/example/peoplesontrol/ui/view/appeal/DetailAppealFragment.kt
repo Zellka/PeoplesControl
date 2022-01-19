@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
+import androidx.appcompat.app.AppCompatActivity
 import com.example.peoplesontrol.R
 import com.example.peoplesontrol.data.model.Appeal
 import com.example.peoplesontrol.databinding.FragmentDetailAppealBinding
@@ -20,6 +21,7 @@ class DetailAppealFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        (activity as? AppCompatActivity)?.supportActionBar?.setDisplayHomeAsUpEnabled(false)
         arguments?.let {
             appeal = it.getParcelable(APPEAL)
         }

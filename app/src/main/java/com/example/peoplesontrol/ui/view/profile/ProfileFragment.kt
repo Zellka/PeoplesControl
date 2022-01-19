@@ -116,6 +116,7 @@ class ProfileFragment : Fragment() {
             ): Boolean {
                 return false
             }
+
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val position = viewHolder.adapterPosition
                 if (direction == ItemTouchHelper.LEFT) {
@@ -126,7 +127,15 @@ class ProfileFragment : Fragment() {
                 }
             }
 
-            override fun onChildDraw(c: Canvas, recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, dX: Float, dY: Float, actionState: Int, isCurrentlyActive: Boolean) {
+            override fun onChildDraw(
+                c: Canvas,
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                dX: Float,
+                dY: Float,
+                actionState: Int,
+                isCurrentlyActive: Boolean
+            ) {
                 val icon: Bitmap
                 point.color = Color.WHITE
                 if (actionState == ItemTouchHelper.ACTION_STATE_SWIPE) {
@@ -146,12 +155,14 @@ class ProfileFragment : Fragment() {
                             this@ProfileFragment.requireContext(),
                             R.drawable.ic_edit
                         )?.toBitmap()!!
-                        c.drawBitmap(icon, null, RectF(
-                            itemView.left.toFloat() + width,
-                            itemView.top.toFloat() + width,
-                            itemView.left.toFloat() + 2 * width,
-                            itemView.bottom.toFloat() - width
-                        ), point)
+                        c.drawBitmap(
+                            icon, null, RectF(
+                                itemView.left.toFloat() + width,
+                                itemView.top.toFloat() + width,
+                                itemView.left.toFloat() + 2 * width,
+                                itemView.bottom.toFloat() - width
+                            ), point
+                        )
                     } else {
                         val background = RectF(
                             itemView.right.toFloat() + dX,
@@ -165,15 +176,25 @@ class ProfileFragment : Fragment() {
                                 this@ProfileFragment.requireContext(),
                                 R.drawable.ic_delete
                             )?.toBitmap()!!
-                        c.drawBitmap(icon, null, RectF(
-                            itemView.right.toFloat() - 2 * width,
-                            itemView.top.toFloat() + width,
-                            itemView.right.toFloat() - width,
-                            itemView.bottom.toFloat() - width
-                        ), point)
+                        c.drawBitmap(
+                            icon, null, RectF(
+                                itemView.right.toFloat() - 2 * width,
+                                itemView.top.toFloat() + width,
+                                itemView.right.toFloat() - width,
+                                itemView.bottom.toFloat() - width
+                            ), point
+                        )
                     }
                 }
-                super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
+                super.onChildDraw(
+                    c,
+                    recyclerView,
+                    viewHolder,
+                    dX,
+                    dY,
+                    actionState,
+                    isCurrentlyActive
+                )
             }
         }
         val itemTouchHelper = ItemTouchHelper(simpleItemTouchCallback)
