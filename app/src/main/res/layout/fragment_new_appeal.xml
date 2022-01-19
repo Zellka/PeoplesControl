@@ -67,53 +67,29 @@
                 android:textColorHighlight="@color/black" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <androidx.appcompat.widget.LinearLayoutCompat
-            android:id="@+id/image_container"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_photos"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:orientation="horizontal"
-            app:layout_constraintTop_toBottomOf="@+id/input_address">
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/image_1"
-                android:layout_width="wrap_content"
-                android:layout_height="100dp"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:scaleType="centerCrop"
-                android:src="@drawable/city_3" />
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/image_2"
-                android:layout_width="wrap_content"
-                android:layout_height="100dp"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:scaleType="centerCrop"
-                android:src="@drawable/city_3" />
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/image_3"
-                android:layout_width="wrap_content"
-                android:layout_height="100dp"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:scaleType="centerCrop"
-                android:src="@drawable/city_3" />
-
-        </androidx.appcompat.widget.LinearLayoutCompat>
+            android:orientation="vertical"
+            android:visibility="gone"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_constraintBottom_toTopOf="@+id/btn_add_photo"
+            app:layout_constraintTop_toBottomOf="@+id/input_address"
+            app:spanCount="3"
+            tools:itemCount="6"
+            tools:listitem="@layout/item_photo" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_add_photo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
             android:background="@drawable/round_gradient"
             android:text="@string/btn_add_photo"
             android:textColor="@color/white"
-            app:layout_constraintTop_toBottomOf="@+id/image_container" />
+            app:layout_constraintTop_toBottomOf="@+id/rv_photos" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/input_name"
