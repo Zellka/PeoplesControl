@@ -21,7 +21,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:padding="20dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/transport_1"
+            android:src="@drawable/placeholder_category"
             tools:ignore="MissingConstraints" />
 
         <androidx.appcompat.widget.AppCompatTextView
