@@ -53,6 +53,12 @@ class AppealAdapter(private var listener: (Appeal) -> Unit) :
         notifyDataSetChanged()
     }
 
+    fun removeItem(position: Int) {
+        appealsFilter.removeAt(position)
+        notifyItemRemoved(position)
+        notifyItemRangeChanged(position, appealsFilter.size)
+    }
+
     override fun getFilter(): Filter {
         return object : Filter() {
             override fun performFiltering(constraint: CharSequence?): FilterResults {

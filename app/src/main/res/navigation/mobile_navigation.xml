@@ -101,6 +101,9 @@
             android:id="@+id/action_profileFragment_to_detailAppealFragment"
             app:destination="@id/navigation_detail_appeal" />
         <action
+            android:id="@+id/action_profileFragment_to_newAppealFragment"
+            app:destination="@id/navigation_new_appeal" />
+        <action
             android:id="@+id/action_profileFragment_to_archiveFragment"
             app:destination="@id/navigation_archive" />
         <action
