@@ -1,5 +1,9 @@
 package com.example.peoplesontrol.data.model
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
 data class Appeal(
     val id: Long,
     val user: String,
@@ -13,4 +17,4 @@ data class Appeal(
     val description: String,
     val rating: Long,
     val numAppeal: Long
-)
+) : Parcelable

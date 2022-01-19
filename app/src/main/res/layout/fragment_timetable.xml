@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingBottom="20dp"
     tools:context=".ui.view.transport.TimetableFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -15,50 +16,113 @@
             android:name="com.google.android.gms.maps.SupportMapFragment"
             android:layout_width="match_parent"
             android:layout_height="300dp"
+            android:layout_margin="10dp"
             tools:ignore="MissingConstraints" />
 
-        <androidx.appcompat.widget.AppCompatSpinner
+        <RadioGroup
             android:id="@+id/directions"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
+            android:orientation="horizontal"
             app:layout_constraintTop_toBottomOf="@+id/map"
-            tools:ignore="MissingConstraints" />
+            tools:ignore="MissingConstraints">
+
+            <RadioButton
+                android:id="@+id/forward_direction"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:checked="true"
+                android:background="@drawable/radio_selector"
+                android:button="@android:color/transparent"
+                android:padding="15dp"
+                android:text="@string/forward_direction"
+                android:textColor="@drawable/text_selector" />
+
+            <RadioButton
+                android:id="@+id/reverse_direction"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/radio_selector"
+                android:button="@android:color/transparent"
+                android:padding="15dp"
+                android:text="@string/reverse_direction"
+                android:textColor="@drawable/text_selector" />
+
+        </RadioGroup>
 
         <androidx.appcompat.widget.AppCompatSpinner
             android:id="@+id/bus_stations"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/directions"
-            app:layout_constraintTop_toBottomOf="@+id/map"
-            tools:ignore="MissingConstraints" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/time"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:textSize="24dp"
+            android:layout_marginStart="5dp"
+            android:padding="10dp"
             app:layout_constraintTop_toBottomOf="@+id/directions"
             tools:ignore="MissingConstraints" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/time_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            app:layout_constraintTop_toBottomOf="@+id/bus_stations">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/title_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:paddingStart="10dp"
+                android:text="Время:"
+                android:textSize="16dp"
+                tools:ignore="MissingConstraints" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:paddingStart="10dp"
+                android:text="21:00"
+                android:textColor="@color/black"
+                android:textSize="18dp"
+                app:layout_constraintBottom_toBottomOf="@+id/title_time"
+                app:layout_constraintStart_toEndOf="@+id/title_time"
+                app:layout_constraintTop_toTopOf="@+id/title_time"
+                tools:ignore="MissingConstraints" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginEnd="5dp"
+                android:src="@drawable/ic_arrow_right"
+                app:layout_constraintBottom_toBottomOf="@+id/title_time"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/title_time" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_check_timetable"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="5dp"
+            android:layout_margin="10dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/round_gradient"
             android:text="@string/btn_check_timetable"
-            app:layout_constraintTop_toBottomOf="@+id/time"
+            android:textColor="@color/white"
+            app:layout_constraintTop_toBottomOf="@+id/time_container"
             tools:ignore="MissingConstraints" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/title_time"
+            android:id="@+id/title_my_time"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:text="Прибытие ближайшего маршрута"
-            android:textSize="14dp"
+            android:padding="10dp"
+            android:layout_margin="10dp"
+            android:text="Прибытие ближайшего маршрута:"
+            android:textSize="16dp"
             android:visibility="invisible"
             app:layout_constraintTop_toBottomOf="@+id/btn_check_timetable"
             tools:ignore="MissingConstraints" />
@@ -67,10 +131,12 @@
             android:id="@+id/time_station"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
+            android:paddingStart="10dp"
+            android:paddingTop="5dp"
+            android:layout_marginStart="10dp"
             android:textColor="@color/black"
-            android:textSize="24dp"
-            app:layout_constraintTop_toBottomOf="@+id/title_time"
+            android:textSize="20dp"
+            app:layout_constraintTop_toBottomOf="@+id/title_my_time"
             tools:ignore="MissingConstraints" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

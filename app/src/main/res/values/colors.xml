@@ -9,6 +9,11 @@
     <color name="gray">#706D6D</color>
     <color name="white">#FFFFFFFF</color>
     <color name="gradient_start">#0550E6</color>
+    <color name="radio_gradient_start">#89ADF6</color>
     <color name="gradient_center">#3370EA</color>
+    <color name="radio_gradient_center">#D1DEF6</color>
     <color name="gradient_end">#6289D6</color>
+    <color name="radio_gradient_end">#EBEDF1</color>
+    <color name="status_processing">#F34B09</color>
+    <color name="status_done">#146A03</color>
 </resources>

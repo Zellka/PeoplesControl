@@ -26,6 +26,7 @@
         <item name="android:statusBarColor" tools:targetApi="l">@color/white</item>
         <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
         <item name="searchViewStyle">@style/SearchView</item>
+        <item name="android:timePickerDialogTheme">@style/PickerStyle</item>
     </style>
 
     <style name="CustomToolBar" parent="Theme.MaterialComponents.Light.DarkActionBar">
@@ -39,6 +40,12 @@
 
     <style name="CustomTabText" parent="TextAppearance.Design.Tab">
         <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="PickerStyle" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorPrimary">@color/white</item>
+        <item name="colorPrimaryDark">@color/white</item>
+        <item name="colorAccent">@color/gradient_center</item>
     </style>
 
 </resources>

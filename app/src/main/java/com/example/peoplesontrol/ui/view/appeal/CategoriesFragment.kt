@@ -35,18 +35,21 @@ class CategoriesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val list = listOf(
-            Category("", "Состояние дорог и прилегающих территорий", 5),
-            Category("", "Состояние благоустройства города", 25),
-            Category("", "Постройки в аварийном состоянии", 61),
-            Category("", "Уборка территорий и вывоз отходов", 17),
-            Category("", "Скопление животных", 23),
-            Category("", "Некачественные товары", 4),
-            Category("", "Проявления вандализма", 46),
-            Category("", "Нарушение КЗОТ", 2),
-            Category("", "Нарушение ПДД", 4),
-            Category("", "Скопление криминальных элементов", 2),
-            Category("", "Прорывы коммуникаций", 41),
-            Category("", "Расписание транспорта", 2)
+            Category(R.drawable.transport_1, "Общественный транспорт", 5),
+            Category(R.drawable.road_2, "Состояние дорог и прилегающий территорий", 25),
+            Category(R.drawable.city_3, "Состояние благоустройства города", 61),
+            Category(R.drawable.breaking_4, "Аварийные участки города", 17),
+            Category(R.drawable.building_5, "Постройки в аварийном состоянии", 23),
+            Category(R.drawable.trash_6, "Уборка территории и вывоз отходов", 4),
+            Category(R.drawable.food_7, "Некачественные товары", 46),
+            Category(R.drawable.animal_8, "Скопление животных", 2),
+            Category(R.drawable.wind_9, "Последствия стихийных бедствий", 4),
+            Category(R.drawable.tank_10, "Последствие военных действий", 2),
+            Category(R.drawable.vandalism_11, "Проявления вандализма", 41),
+            Category(R.drawable.fort_12, "Состояние убежищ", 2),
+            Category(R.drawable.work_13, "Состояние рабочего места", 12),
+            Category(R.drawable.crime_14, "Скопление криминальных элементов", 75),
+            Category(R.drawable.car_15, "Нарушение ПДД", 2),
         )
 
         binding.rvCategories.layoutManager = GridLayoutManager(this.requireContext(), 2)

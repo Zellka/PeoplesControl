@@ -1,26 +1,40 @@
-package com.example.peoplesontrol.ui.view.map
+package com.example.peoplesontrol.ui.view.appeal
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.DialogFragment
 import com.example.peoplesontrol.R
+import com.example.peoplesontrol.databinding.FragmentDialogMapBinding
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 
-class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
+class DialogMapFragment : DialogFragment(), OnMapReadyCallback {
+
+    private var _binding: FragmentDialogMapBinding? = null
+    private val binding get() = _binding!!
+
+
+    private var param1: String? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        arguments?.let {
+            param1 = it.getString(ARG_PARAM1)
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_map, container, false)
+    ): View {
+        _binding = FragmentDialogMapBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -37,12 +51,17 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
                 .title("Donetsk")
         )
         p0.moveCamera(CameraUpdateFactory.newLatLng(LatLng(47.9917, 37.7759)))
-        p0.setOnMarkerClickListener(this)
     }
 
-    override fun onMarkerClick(p0: Marker): Boolean {
-        val dialogAppealFragment = DialogAppealFragment()
-        dialogAppealFragment.show(childFragmentManager, "MAP")
-        return true
+    companion object {
+        private const val ARG_PARAM1 = "param1"
+
+        @JvmStatic
+        fun newInstance(param1: String, param2: String) =
+            DialogMapFragment().apply {
+                arguments = Bundle().apply {
+                    putString(ARG_PARAM1, param1)
+                }
+            }
     }
 }

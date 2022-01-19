@@ -19,11 +19,6 @@ class LoginFragment : Fragment() {
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -63,15 +58,5 @@ class LoginFragment : Fragment() {
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) = Unit
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) = Unit
         })
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            android.R.id.home -> {
-                findNavController().navigate(R.id.action_loginFragment_to_regionFragment)
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
     }
 }

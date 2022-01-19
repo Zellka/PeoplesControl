@@ -3,6 +3,7 @@ package com.example.peoplesontrol.ui.view.profile
 import android.os.Bundle
 import android.view.*
 import androidx.appcompat.widget.SearchView
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -10,6 +11,7 @@ import com.example.peoplesontrol.R
 import com.example.peoplesontrol.data.model.Appeal
 import com.example.peoplesontrol.databinding.FragmentArchiveBinding
 import com.example.peoplesontrol.ui.adapter.AppealAdapter
+import com.example.peoplesontrol.ui.view.appeal.DetailAppealFragment
 
 class ArchiveFragment : Fragment() {
 
@@ -84,7 +86,8 @@ class ArchiveFragment : Fragment() {
     }
 
     private fun showAppeal(appeal: Appeal) {
-        findNavController().navigate(R.id.action_archiveFragment_to_appealFragment)
+        val bundle = bundleOf(DetailAppealFragment.APPEAL to appeal)
+        findNavController().navigate(R.id.action_archiveFragment_to_detailAppealFragment, bundle)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

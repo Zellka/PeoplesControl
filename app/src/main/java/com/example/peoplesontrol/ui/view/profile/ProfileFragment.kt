@@ -2,7 +2,7 @@ package com.example.peoplesontrol.ui.view.profile
 
 import android.os.Bundle
 import android.view.*
-import androidx.appcompat.widget.SearchView
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -10,6 +10,7 @@ import com.example.peoplesontrol.R
 import com.example.peoplesontrol.data.model.Appeal
 import com.example.peoplesontrol.databinding.FragmentProfileBinding
 import com.example.peoplesontrol.ui.adapter.AppealAdapter
+import com.example.peoplesontrol.ui.view.appeal.DetailAppealFragment
 
 class ProfileFragment : Fragment() {
 
@@ -70,7 +71,8 @@ class ProfileFragment : Fragment() {
     }
 
     private fun showAppeal(appeal: Appeal) {
-        findNavController().navigate(R.id.action_profileFragment_to_appealFragment)
+        val bundle = bundleOf(DetailAppealFragment.APPEAL to appeal)
+        findNavController().navigate(R.id.action_profileFragment_to_detailAppealFragment, bundle)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -82,6 +84,9 @@ class ProfileFragment : Fragment() {
         val id = item.itemId
         if (id == R.id.action_archive) {
             findNavController().navigate((R.id.action_profileFragment_to_archiveFragment))
+        }
+        if (id == R.id.action_setting) {
+            findNavController().navigate((R.id.action_profileFragment_to_editProfileFragment))
         }
         return super.onOptionsItemSelected(item)
     }

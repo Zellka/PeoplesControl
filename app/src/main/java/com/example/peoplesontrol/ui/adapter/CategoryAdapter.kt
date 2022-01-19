@@ -39,6 +39,7 @@ class CategoryAdapter(private var listener: (Category) -> Unit) :
     inner class CategoryHolder(var binding: ItemCategoryBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(category: Category) {
+            binding.imgCategory.setImageResource(category.image)
             binding.titleCategory.text = category.title
             binding.numAppeal.text = category.numAppeal.toString()
         }

@@ -45,16 +45,6 @@ class TimetableFragment : Fragment(), OnMapReadyCallback {
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
-        val directions =
-            arrayOf(
-                "Прямое",
-                "Обратное"
-            )
-        val adapterDirections: ArrayAdapter<String> =
-            ArrayAdapter(this.requireContext(), android.R.layout.simple_spinner_item, directions)
-        adapterDirections.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        binding.directions.adapter = adapterDirections
-
         val busStations =
             arrayOf(
                 "ЖД",
@@ -70,7 +60,7 @@ class TimetableFragment : Fragment(), OnMapReadyCallback {
 
         val cal = Calendar.getInstance()
         binding.time.text = SimpleDateFormat("HH:mm").format(cal.time)
-        binding.time.setOnClickListener {
+        binding.timeContainer.setOnClickListener {
             val timeSetListener = TimePickerDialog.OnTimeSetListener { timePicker, hour, minute ->
                 cal.set(Calendar.HOUR_OF_DAY, hour)
                 cal.set(Calendar.MINUTE, minute)
@@ -85,7 +75,7 @@ class TimetableFragment : Fragment(), OnMapReadyCallback {
             ).show()
         }
         binding.btnCheckTimetable.setOnClickListener {
-            binding.titleTime.visibility = View.VISIBLE
+            binding.titleMyTime.visibility = View.VISIBLE
             binding.timeStation.text = SimpleDateFormat("HH:mm").format(cal.time)
         }
     }

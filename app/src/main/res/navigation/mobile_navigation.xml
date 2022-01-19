@@ -21,12 +21,18 @@
         android:label="@string/title_appeals"
         tools:layout="@layout/fragment_all_appeals">
         <action
-            android:id="@+id/action_appealsFragment_to_appealFragment"
+            android:id="@+id/action_appealsFragment_to_detailAppealFragment"
             app:destination="@id/navigation_detail_appeal" />
         <action
             android:id="@+id/action_appealsFragment_to_categoriesFragment"
             app:destination="@id/navigation_categories" />
     </fragment>
+
+    <fragment
+        android:id="@+id/navigation_detail_appeal"
+        android:name="com.example.peoplesontrol.ui.view.appeal.DetailAppealFragment"
+        android:label="@string/title_appeal"
+        tools:layout="@layout/fragment_detail_appeal"/>
 
     <fragment
         android:id="@+id/navigation_map"
@@ -35,10 +41,10 @@
         tools:layout="@layout/fragment_all_map" />
 
     <fragment
-        android:id="@+id/navigation_detail_appeal"
-        android:name="com.example.peoplesontrol.ui.view.appeal.DetailAppealFragment"
+        android:id="@+id/navigation_new_appeal"
+        android:name="com.example.peoplesontrol.ui.view.appeal.NewAppealFragment"
         android:label="@string/title_new_appeal"
-        tools:layout="@layout/fragment_detail_appeal" />
+        tools:layout="@layout/fragment_new_appeal" />
 
     <fragment
         android:id="@+id/navigation_archive"
@@ -46,7 +52,7 @@
         android:label="@string/title_archive"
         tools:layout="@layout/fragment_archive">
         <action
-            android:id="@+id/action_archiveFragment_to_appealFragment"
+            android:id="@+id/action_archiveFragment_to_detailAppealFragment"
             app:destination="@id/navigation_detail_appeal" />
         <action
             android:id="@+id/action_archiveFragment_to_profileFragment"
@@ -92,10 +98,23 @@
         android:label="@string/title_profile"
         tools:layout="@layout/fragment_profile">
         <action
-            android:id="@+id/action_profileFragment_to_appealFragment"
+            android:id="@+id/action_profileFragment_to_detailAppealFragment"
             app:destination="@id/navigation_detail_appeal" />
         <action
             android:id="@+id/action_profileFragment_to_archiveFragment"
             app:destination="@id/navigation_archive" />
+        <action
+            android:id="@+id/action_profileFragment_to_editProfileFragment"
+            app:destination="@id/navigation_edit_profile" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_edit_profile"
+        android:name="com.example.peoplesontrol.ui.view.profile.EditProfileFragment"
+        android:label="@string/title_edit_profile"
+        tools:layout="@layout/fragment_edit_profile">
+        <action
+            android:id="@+id/action_editProfileFragment_to_profileFragment"
+            app:destination="@id/navigation_profile" />
     </fragment>
 </navigation>

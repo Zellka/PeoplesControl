@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Народный контроль</string>
-    <string name="input_number">Номер</string>
+    <string name="input_number">Номер телефона</string>
     <string name="btn_ok">OK</string>
     <string name="btn_send">Отправить</string>
     <string name="title_registration">Регистрация</string>
@@ -23,7 +23,7 @@
     <string name="title_my_appeals"><u>Мои заявки</u></string>
     <string name="input_description">Описание</string>
     <string name="input_address">Адрес</string>
-    <string name="visible_name">Не отображать Ф.И.О.</string>
+    <string name="visible_name">Анонимно</string>
     <string name="input_video">Ссылка на видео</string>
     <string name="title_transport">Расписание транспорта</string>
     <string name="google_maps_key">api_key</string>
@@ -32,4 +32,16 @@
     <string name="btn_add_appeal">Добавить к заявке</string>
     <string name="input_error">Обязательно поле</string>
     <string name="title_setting">Настройки</string>
+    <string name="btn_add_photo">Загрузить фотографии</string>
+    <string name="input_category">Категория</string>
+    <string name="forward_direction">Прямое</string>
+    <string name="reverse_direction">Обратное</string>
+    <string name="title_appeal">Заявка</string>
+    <string name="btn_show_on_map"><u>На карте</u></string>
+    <string name="title_description">Описание:</string>
+    <string name="title_address">Адрес:</string>
+    <string name="title_date">Дата обращения:</string>
+    <string name="title_video">Видео:</string>
+    <string name="title_edit_profile">Редактировать</string>
+    <string name="title_num_appeal">Количество заявок:</string>
 </resources>

@@ -1,8 +1,13 @@
 package com.example.peoplesontrol.ui.view.appeal
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
+import android.widget.ArrayAdapter
+import androidx.appcompat.widget.AppCompatSpinner
 import androidx.appcompat.widget.SearchView
+import androidx.core.os.bundleOf
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -10,6 +15,9 @@ import com.example.peoplesontrol.R
 import com.example.peoplesontrol.data.model.Appeal
 import com.example.peoplesontrol.databinding.FragmentAppealBinding
 import com.example.peoplesontrol.ui.adapter.AppealAdapter
+import android.view.SubMenu
+import android.widget.Toast
+
 
 class AppealFragment : Fragment() {
 
@@ -17,6 +25,8 @@ class AppealFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var adapter: AppealAdapter
+
+    private var cities = arrayListOf<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,7 +51,7 @@ class AppealFragment : Fragment() {
                 "53",
                 "26",
                 "В обработке",
-                "",
+                "https://ahjdhajshd.com",
                 "14.01.22",
                 "Большая авария, 2 машины, 1 пострадавший",
                 0,
@@ -83,7 +93,7 @@ class AppealFragment : Fragment() {
                 "53",
                 "26",
                 "В обработке",
-                "",
+                "https://ahjdhajshd.com",
                 "14.01.22",
                 "Большая авария, 2 машины, 1 пострадавший",
                 0,
@@ -95,21 +105,38 @@ class AppealFragment : Fragment() {
         adapter = AppealAdapter { appeal: Appeal -> showAppeal(appeal) }
         adapter.setData(list)
         binding.rvAppeals.adapter = adapter
+
+        cities = arrayListOf(
+            "Донецк",
+            "Макеевка",
+            "Харцызск",
+            "Горловка",
+            "Ясиноватая",
+            "Торез"
+        )
     }
 
     private fun showAppeal(appeal: Appeal) {
-        findNavController().navigate(R.id.action_appealsFragment_to_appealFragment)
+        val bundle = bundleOf(DetailAppealFragment.APPEAL to appeal)
+        findNavController().navigate(R.id.action_appealsFragment_to_detailAppealFragment, bundle)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.search_menu, menu)
+        inflater.inflate(R.menu.appeal_menu, menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val id = item.itemId
         if (id == android.R.id.home) {
             findNavController().navigate(R.id.action_appealsFragment_to_categoriesFragment)
+        }
+        if (id == R.id.action_city) {
+            item.subMenu.clear()
+            val sub = item.subMenu
+            for ((id, city) in cities.withIndex()) {
+                sub.add(0, id, 0, city)
+            }
         }
         if (id == R.id.action_search) {
             val searchView = item.actionView as SearchView
