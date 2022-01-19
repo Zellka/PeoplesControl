@@ -91,7 +91,7 @@ class EditProfileFragment : Fragment() {
     }
 
     companion object {
-        private val IMAGE_PICK_CODE = 1000
-        private val PERMISSION_CODE = 1001
+        private const val IMAGE_PICK_CODE = 1000
+        private const val PERMISSION_CODE = 1001
     }
 }
