@@ -32,9 +32,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:checked="true"
                 android:background="@drawable/radio_selector"
                 android:button="@android:color/transparent"
+                android:checked="true"
                 android:padding="15dp"
                 android:text="@string/forward_direction"
                 android:textColor="@drawable/text_selector" />
@@ -119,8 +119,8 @@
             android:id="@+id/title_my_time"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp"
             android:layout_margin="10dp"
+            android:padding="10dp"
             android:text="Прибытие ближайшего маршрута:"
             android:textSize="16dp"
             android:visibility="invisible"
@@ -131,13 +131,23 @@
             android:id="@+id/time_station"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
             android:paddingStart="10dp"
             android:paddingTop="5dp"
-            android:layout_marginStart="10dp"
             android:textColor="@color/black"
             android:textSize="20dp"
             app:layout_constraintTop_toBottomOf="@+id/title_my_time"
             tools:ignore="MissingConstraints" />
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

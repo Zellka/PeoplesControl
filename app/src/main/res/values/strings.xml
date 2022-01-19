@@ -31,7 +31,6 @@
     <string name="btn_check_timetable">Проверить расписание</string>
     <string name="btn_add_appeal">Добавить к заявке</string>
     <string name="input_error">Обязательно поле</string>
-    <string name="title_setting">Настройки</string>
     <string name="btn_add_photo">Загрузить фотографии</string>
     <string name="input_category">Категория</string>
     <string name="forward_direction">Прямое</string>

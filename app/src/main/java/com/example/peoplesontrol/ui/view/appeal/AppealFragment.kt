@@ -16,7 +16,9 @@ import com.example.peoplesontrol.data.model.Appeal
 import com.example.peoplesontrol.databinding.FragmentAppealBinding
 import com.example.peoplesontrol.ui.adapter.AppealAdapter
 import android.view.SubMenu
+import android.widget.TextView
 import android.widget.Toast
+import kotlinx.android.synthetic.main.layout_error.view.*
 
 
 class AppealFragment : Fragment() {
@@ -119,6 +121,20 @@ class AppealFragment : Fragment() {
     private fun showAppeal(appeal: Appeal) {
         val bundle = bundleOf(DetailAppealFragment.APPEAL to appeal)
         findNavController().navigate(R.id.action_appealsFragment_to_detailAppealFragment, bundle)
+    }
+
+    private fun showErrorMessage(){
+        val layout: View = activity?.layoutInflater!!.inflate(R.layout.layout_error, null)
+        val text = layout.findViewById<View>(R.id.text_error) as TextView
+        val img = layout.img_error
+        text.text = "Ошибка сервера"
+        text.width = 900
+        img.setImageResource(R.drawable.ic_error)
+        Toast(activity).apply {
+            duration = Toast.LENGTH_LONG
+            this.view = layout
+            setGravity(Gravity.TOP, 0, 0)
+        }.show()
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

@@ -66,4 +66,14 @@
         app:layout_constraintTop_toBottomOf="@+id/title_appeals"
         tools:listitem="@layout/item_appeal" />
 
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/rv_appeals"
+        app:layout_constraintEnd_toEndOf="@+id/rv_appeals"
+        app:layout_constraintStart_toStartOf="@+id/rv_appeals"
+        app:layout_constraintTop_toTopOf="@+id/rv_appeals" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

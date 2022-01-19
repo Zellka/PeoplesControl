@@ -4,10 +4,13 @@ import android.Manifest
 import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Bundle
+import android.view.Gravity
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import com.example.peoplesontrol.R
 import com.example.peoplesontrol.databinding.FragmentMapBinding
@@ -20,6 +23,7 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+import kotlinx.android.synthetic.main.layout_error.view.*
 
 class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
@@ -95,6 +99,20 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
         val dialogAppealFragment = DialogAppealFragment()
         dialogAppealFragment.show(childFragmentManager, "MAP")
         return true
+    }
+
+    private fun showErrorMessage(){
+        val layout: View = activity?.layoutInflater!!.inflate(R.layout.layout_error, null)
+        val text = layout.findViewById<View>(R.id.text_error) as TextView
+        val img = layout.img_error
+        text.text = "Ошибка сервера"
+        text.width = 900
+        img.setImageResource(R.drawable.ic_error)
+        Toast(activity).apply {
+            duration = Toast.LENGTH_LONG
+            this.view = layout
+            setGravity(Gravity.TOP, 0, 0)
+        }.show()
     }
 
     companion object {

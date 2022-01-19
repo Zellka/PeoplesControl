@@ -2,12 +2,11 @@ package com.example.peoplesontrol.ui.view.transport
 
 import android.app.TimePickerDialog
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.TextView
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.example.peoplesontrol.R
 import com.example.peoplesontrol.databinding.FragmentTimetableBinding
@@ -18,6 +17,7 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.maps.model.PolylineOptions
+import kotlinx.android.synthetic.main.layout_error.view.*
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -104,6 +104,20 @@ class TimetableFragment : Fragment(), OnMapReadyCallback {
                 .title("End")
         )
         p0.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(-35.016, 143.321), 5f))
+    }
+
+    private fun showErrorMessage(){
+        val layout: View = activity?.layoutInflater!!.inflate(R.layout.layout_error, null)
+        val text = layout.findViewById<View>(R.id.text_error) as TextView
+        val img = layout.img_error
+        text.text = "Ошибка сервера"
+        text.width = 900
+        img.setImageResource(R.drawable.ic_error)
+        Toast(activity).apply {
+            duration = Toast.LENGTH_LONG
+            this.view = layout
+            setGravity(Gravity.TOP, 0, 0)
+        }.show()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

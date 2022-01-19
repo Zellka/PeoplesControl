@@ -7,8 +7,8 @@
         android:title="@string/title_archive"
         app:showAsAction="always" />
     <item
-        android:id="@+id/action_setting"
+        android:id="@+id/action_edit"
         android:icon="@drawable/ic_setting"
-        android:title="@string/title_setting"
+        android:title="@string/title_edit_profile"
         app:showAsAction="always" />
 </menu>

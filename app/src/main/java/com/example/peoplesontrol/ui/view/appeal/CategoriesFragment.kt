@@ -2,6 +2,8 @@ package com.example.peoplesontrol.ui.view.appeal
 
 import android.os.Bundle
 import android.view.*
+import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.core.os.bundleOf
@@ -11,6 +13,7 @@ import com.example.peoplesontrol.R
 import com.example.peoplesontrol.data.model.Category
 import com.example.peoplesontrol.databinding.FragmentCategoriesBinding
 import com.example.peoplesontrol.ui.adapter.CategoryAdapter
+import kotlinx.android.synthetic.main.layout_error.view.*
 
 class CategoriesFragment : Fragment() {
 
@@ -34,6 +37,7 @@ class CategoriesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         val list = listOf(
             Category(R.drawable.transport_1, "Общественный транспорт", 5),
             Category(R.drawable.road_2, "Состояние дорог и прилегающий территорий", 25),
@@ -60,6 +64,20 @@ class CategoriesFragment : Fragment() {
 
     private fun showAppeals(category: Category) {
         findNavController().navigate(R.id.action_categoriesFragment_to_appealsFragment)
+    }
+
+    private fun showErrorMessage() {
+        val layout: View = activity?.layoutInflater!!.inflate(R.layout.layout_error, null)
+        val text = layout.findViewById<View>(R.id.text_error) as TextView
+        val img = layout.img_error
+        text.text = "Ошибка сервера"
+        text.width = 900
+        img.setImageResource(R.drawable.ic_error)
+        Toast(activity).apply {
+            duration = Toast.LENGTH_LONG
+            this.view = layout
+            setGravity(Gravity.TOP, 0, 0)
+        }.show()
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
