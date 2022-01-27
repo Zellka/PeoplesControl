@@ -4,17 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.view.appeal.DialogMapFragment">
+    tools:context=".ui.view.request.DialogMapFragment">
 
     <fragment
         android:id="@+id/map"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
-        android:layout_height="400dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="15dp"
-        android:layout_marginBottom="100dp"
-        map:cameraZoom="15"
+        android:layout_height="match_parent"
+        map:cameraZoom="17"
         tools:ignore="MissingConstraints" />
 </androidx.constraintlayout.widget.ConstraintLayout>

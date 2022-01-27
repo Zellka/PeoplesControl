@@ -7,57 +7,57 @@
 
     <fragment
         android:id="@+id/navigation_categories"
-        android:name="com.example.peoplesontrol.ui.view.appeal.CategoriesFragment"
+        android:name="com.example.peoplesontrol.ui.view.request.CategoriesFragment"
         android:label="@string/title_categories"
         tools:layout="@layout/fragment_categories">
         <action
-            android:id="@+id/action_categoriesFragment_to_appealsFragment"
-            app:destination="@id/navigation_all_appeals" />
+            android:id="@+id/action_categoriesFragment_to_requestsFragment"
+            app:destination="@id/navigation_all_requests" />
     </fragment>
 
     <fragment
-        android:id="@+id/navigation_all_appeals"
-        android:name="com.example.peoplesontrol.ui.view.appeal.AllAppealsFragment"
-        android:label="@string/title_appeals"
-        tools:layout="@layout/fragment_all_appeals">
+        android:id="@+id/navigation_all_requests"
+        android:name="com.example.peoplesontrol.ui.view.request.AllRequestsFragment"
+        android:label="@string/title_requests"
+        tools:layout="@layout/fragment_all_requests">
         <action
-            android:id="@+id/action_appealsFragment_to_detailAppealFragment"
-            app:destination="@id/navigation_detail_appeal" />
+            android:id="@+id/action_requestsFragment_to_detailRequestFragment"
+            app:destination="@id/navigation_detail_request" />
         <action
-            android:id="@+id/action_appealsFragment_to_categoriesFragment"
+            android:id="@+id/action_requestsFragment_to_categoriesFragment"
             app:destination="@id/navigation_categories" />
+        <action
+            android:id="@+id/action_requestsFragment_to_editRequestFragment"
+            app:destination="@id/navigation_edit_request" />
     </fragment>
 
     <fragment
-        android:id="@+id/navigation_detail_appeal"
-        android:name="com.example.peoplesontrol.ui.view.appeal.DetailAppealFragment"
-        android:label="@string/title_appeal"
-        tools:layout="@layout/fragment_detail_appeal"/>
+        android:id="@+id/navigation_detail_request"
+        android:name="com.example.peoplesontrol.ui.view.request.DetailRequestFragment"
+        android:label="@string/title_request"
+        tools:layout="@layout/fragment_detail_request">
+        <action
+            android:id="@+id/action_detailFragment_to_editRequestFragment"
+            app:destination="@id/navigation_edit_request" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_map"
-        android:name="com.example.peoplesontrol.ui.view.map.AllMapFragment"
+        android:name="com.example.peoplesontrol.ui.view.map.MapFragment"
         android:label="@string/title_map"
-        tools:layout="@layout/fragment_all_map" />
+        tools:layout="@layout/fragment_map" />
 
     <fragment
-        android:id="@+id/navigation_new_appeal"
-        android:name="com.example.peoplesontrol.ui.view.appeal.NewAppealFragment"
-        android:label="@string/title_new_appeal"
-        tools:layout="@layout/fragment_new_appeal" />
+        android:id="@+id/navigation_new_request"
+        android:name="com.example.peoplesontrol.ui.view.request.NewRequestFragment"
+        android:label="@string/title_new_request"
+        tools:layout="@layout/fragment_new_request" />
 
     <fragment
-        android:id="@+id/navigation_archive"
-        android:name="com.example.peoplesontrol.ui.view.profile.ArchiveFragment"
-        android:label="@string/title_archive"
-        tools:layout="@layout/fragment_archive">
-        <action
-            android:id="@+id/action_archiveFragment_to_detailAppealFragment"
-            app:destination="@id/navigation_detail_appeal" />
-        <action
-            android:id="@+id/action_archiveFragment_to_profileFragment"
-            app:destination="@id/navigation_profile" />
-    </fragment>
+        android:id="@+id/navigation_edit_request"
+        android:name="com.example.peoplesontrol.ui.view.request.EditRequestFragment"
+        android:label="@string/title_edit_profile"
+        tools:layout="@layout/fragment_edit_request" />
 
     <fragment
         android:id="@+id/navigation_transport"
@@ -98,17 +98,36 @@
         android:label="@string/title_profile"
         tools:layout="@layout/fragment_profile">
         <action
-            android:id="@+id/action_profileFragment_to_detailAppealFragment"
-            app:destination="@id/navigation_detail_appeal" />
+            android:id="@+id/action_profileFragment_to_detailRequestFragment"
+            app:destination="@id/navigation_detail_request" />
         <action
-            android:id="@+id/action_profileFragment_to_newAppealFragment"
-            app:destination="@id/navigation_new_appeal" />
-        <action
-            android:id="@+id/action_profileFragment_to_archiveFragment"
-            app:destination="@id/navigation_archive" />
+            android:id="@+id/action_profileFragment_to_newRequestFragment"
+            app:destination="@id/navigation_new_request" />
         <action
             android:id="@+id/action_profileFragment_to_editProfileFragment"
             app:destination="@id/navigation_edit_profile" />
+        <action
+            android:id="@+id/action_profileFragment_to_editRequestFragment"
+            app:destination="@id/navigation_edit_request" />
+        <action
+            android:id="@+id/action_profileFragment_to_archiveFragment"
+            app:destination="@id/navigation_archive" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_archive"
+        android:name="com.example.peoplesontrol.ui.view.profile.ArchiveFragment"
+        android:label="@string/title_archive"
+        tools:layout="@layout/fragment_archive">
+        <action
+            android:id="@+id/action_archiveFragment_to_detailAppealFragment"
+            app:destination="@id/navigation_detail_request" />
+        <action
+            android:id="@+id/action_archiveFragment_to_profileFragment"
+            app:destination="@id/navigation_profile" />
+        <action
+            android:id="@+id/action_archiveFragment_to_editRequestFragment"
+            app:destination="@id/navigation_edit_request" />
     </fragment>
 
     <fragment

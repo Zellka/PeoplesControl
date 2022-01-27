@@ -2,30 +2,34 @@ package com.example.peoplesontrol.ui.view.profile
 
 import android.os.Bundle
 import android.view.*
-import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.peoplesontrol.R
-import com.example.peoplesontrol.data.model.Appeal
+import com.example.peoplesontrol.data.model.Profile
+import com.example.peoplesontrol.data.model.Request
 import com.example.peoplesontrol.databinding.FragmentArchiveBinding
-import com.example.peoplesontrol.ui.adapter.AppealAdapter
-import com.example.peoplesontrol.ui.view.appeal.DetailAppealFragment
-import kotlinx.android.synthetic.main.layout_error.view.*
+import com.example.peoplesontrol.ui.adapter.RequestAdapter
+import com.example.peoplesontrol.ui.view.profile.ProfileFragment.Companion.PROFILE
+import com.example.peoplesontrol.ui.view.request.DetailRequestFragment.Companion.REQUEST
+import com.example.peoplesontrol.ui.view.request.RequestFragment.Companion.IS_ADD_TO_REQUEST
 
 class ArchiveFragment : Fragment() {
 
     private var _binding: FragmentArchiveBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var adapter: AppealAdapter
+    private lateinit var adapter: RequestAdapter
+    private var profile: Profile? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
+        arguments?.let {
+            profile = it.getParcelable(PROFILE)
+        }
     }
 
     override fun onCreateView(
@@ -37,74 +41,29 @@ class ArchiveFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val list = listOf(
-            Appeal(
-                11,
-                "Петрова Ольга Николаевна",
-                "Нарушение ПДД",
-                "г.Донецк, ул.Артёма, 66",
-                "53",
-                "26",
-                "Выполнено",
-                "",
-                "14.01.22",
-                "Большая авария, 2 машины, 1 пострадавший",
-                10,
-                14
-            ),
-            Appeal(
-                16,
-                "Петрова Ольга Николаевна",
-                "Нарушение КЗОТ",
-                "г.Донецк, ул.Артёма, 66",
-                "53",
-                "26",
-                "Выполнено",
-                "",
-                "14.01.22",
-                "Большая авария, 2 машины, 1 пострадавший",
-                15,
-                1
-            ),
-            Appeal(
-                19,
-                "Петрова Ольга Николаевна",
-                "Нарушение ПДД",
-                "г.Донецк, ул.Артёма, 66",
-                "53",
-                "26",
-                "Выполнено",
-                "",
-                "14.01.22",
-                "Большая авария, 2 машины, 1 пострадавший",
-                5,
-                1
+        binding.rvRequests.layoutManager = LinearLayoutManager(this.requireContext())
+        adapter = RequestAdapter { appeal: Request, isAdd: Boolean -> showRequest(appeal, isAdd) }
+        if (profile?.requests?.isNotEmpty() == true) {
+            adapter.apply {
+                profile?.requests?.filter { it.deleted_at != null }?.let { setData(it) }
+                notifyDataSetChanged()
+            }
+        }
+        binding.rvRequests.adapter = adapter
+    }
+
+    private fun showRequest(request: Request, isAddRequest: Boolean) {
+        if (isAddRequest) {
+            val bundle =
+                bundleOf(REQUEST to request, IS_ADD_TO_REQUEST to isAddRequest)
+            findNavController().navigate(R.id.action_archiveFragment_to_editRequestFragment, bundle)
+        } else {
+            val bundle = bundleOf(REQUEST to request)
+            findNavController().navigate(
+                R.id.action_archiveFragment_to_detailAppealFragment,
+                bundle
             )
-        )
-
-        binding.rvAppeals.layoutManager = LinearLayoutManager(this.requireContext())
-        adapter = AppealAdapter { appeal: Appeal -> showAppeal(appeal) }
-        adapter.setData(list)
-        binding.rvAppeals.adapter = adapter
-    }
-
-    private fun showAppeal(appeal: Appeal) {
-        val bundle = bundleOf(DetailAppealFragment.APPEAL to appeal)
-        findNavController().navigate(R.id.action_archiveFragment_to_detailAppealFragment, bundle)
-    }
-
-    private fun showErrorMessage(){
-        val layout: View = activity?.layoutInflater!!.inflate(R.layout.layout_error, null)
-        val text = layout.findViewById<View>(R.id.text_error) as TextView
-        val img = layout.img_error
-        text.text = "Ошибка сервера"
-        text.width = 900
-        img.setImageResource(R.drawable.ic_error)
-        Toast(activity).apply {
-            duration = Toast.LENGTH_LONG
-            this.view = layout
-            setGravity(Gravity.TOP, 0, 0)
-        }.show()
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

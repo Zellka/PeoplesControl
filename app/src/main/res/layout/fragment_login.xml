@@ -21,16 +21,13 @@
         app:hintTextColor="@color/black"
         tools:ignore="MissingConstraints">
 
-        <br.com.sapereaude.maskedEditText.MaskedEditText
+        <EditText
             android:id="@+id/edit_number"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/black"
-            android:inputType="phone"
-            android:textColorHighlight="@color/black"
-            android:typeface="monospace"
-            mask:allowed_chars="1234567890"
-            mask:mask="(071) ###-##-##" />
+            android:inputType="text"
+            android:textColorHighlight="@color/black" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout

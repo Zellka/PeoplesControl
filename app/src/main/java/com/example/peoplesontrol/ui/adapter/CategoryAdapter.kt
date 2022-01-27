@@ -39,9 +39,8 @@ class CategoryAdapter(private var listener: (Category) -> Unit) :
     inner class CategoryHolder(var binding: ItemCategoryBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(category: Category) {
-            binding.imgCategory.setImageResource(category.image)
+            //binding.imgCategory.setImageResource(category.icon)
             binding.titleCategory.text = category.title
-            binding.numAppeal.text = category.numAppeal.toString()
         }
     }
 
@@ -62,11 +61,6 @@ class CategoryAdapter(private var listener: (Category) -> Unit) :
                     val resultList: MutableList<Category> = ArrayList()
                     for (row in categories) {
                         if (row.title.toLowerCase(Locale.ROOT)
-                                .contains(charSearch.toLowerCase(Locale.ROOT))
-                        ) {
-                            resultList.add(row)
-                        }
-                        if (row.numAppeal.toString().toLowerCase(Locale.ROOT)
                                 .contains(charSearch.toLowerCase(Locale.ROOT))
                         ) {
                             resultList.add(row)

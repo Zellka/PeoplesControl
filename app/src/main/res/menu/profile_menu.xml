@@ -4,6 +4,7 @@
     <item
         android:id="@+id/action_archive"
         android:icon="@drawable/ic_archive"
+        android:iconTint="@color/black"
         android:title="@string/title_archive"
         app:showAsAction="always" />
     <item

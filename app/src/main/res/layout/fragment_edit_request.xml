@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:mask="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.view.request.EditRequestFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:fitsSystemWindows="true"
+        android:paddingBottom="80dp">
+
+        <TextView
+            android:id="@+id/category"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:textColor="@color/black"
+            android:textSize="18dp"
+            tools:ignore="MissingConstraints" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/input_description"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:hint="@string/input_description"
+            android:textColorHint="@color/black"
+            app:boxStrokeColor="@color/black"
+            app:hintTextColor="@color/black"
+            app:layout_constraintTop_toBottomOf="@+id/category"
+            tools:ignore="MissingConstraints">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edit_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/black"
+                android:inputType="textCapSentences"
+                android:textColorHighlight="@color/black" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/input_address"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:hint="@string/input_address"
+            android:textColorHint="@color/black"
+            app:boxStrokeColor="@color/black"
+            app:errorEnabled="true"
+            app:hintTextColor="@color/black"
+            app:layout_constraintTop_toBottomOf="@+id/input_description"
+            tools:ignore="MissingConstraints">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edit_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/black"
+                android:inputType="text"
+                android:textColorHighlight="@color/black" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_photos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_constraintBottom_toTopOf="@+id/btn_add_photo"
+            app:layout_constraintTop_toBottomOf="@+id/input_address"
+            app:spanCount="3"
+            tools:itemCount="6"
+            tools:listitem="@layout/item_photo" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_add_photo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/round_gradient"
+            android:text="@string/btn_add_photo"
+            android:textColor="@color/white"
+            app:layout_constraintTop_toBottomOf="@+id/rv_photos" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/input_video"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/input_video"
+            android:paddingTop="10dp"
+            android:textColorHint="@color/black"
+            app:boxStrokeColor="@color/black"
+            app:hintTextColor="@color/black"
+            app:layout_constraintTop_toBottomOf="@+id/btn_add_photo"
+            tools:ignore="MissingConstraints">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edit_video"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/black"
+                android:inputType="textMultiLine"
+                android:textColorHighlight="@color/black" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_send"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/round_gradient"
+            android:text="@string/btn_send"
+            android:textColor="@color/white"
+            app:layout_constraintTop_toBottomOf="@+id/input_video" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

@@ -12,9 +12,9 @@
         android:title="@string/title_map" />
 
     <item
-        android:id="@+id/navigation_new_appeal"
+        android:id="@+id/navigation_new_request"
         android:icon="@drawable/ic_plus"
-        android:title="@string/title_new_appeal" />
+        android:title="@string/title_new_request" />
 
     <item
         android:id="@+id/navigation_city"

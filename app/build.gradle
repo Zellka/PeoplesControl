@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-android-extensions'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -49,4 +50,16 @@ dependencies {
     implementation "com.google.android.gms:play-services-location:$locationVersion"
     implementation "ru.egslava:MaskedEditText:$maskedEditTextVersion"
     implementation "de.hdodenhof:circleimageview:$circleImageViewVersion"
+
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$converterGsonVersion"
+    implementation "com.google.code.gson:gson:$gsonVersion"
+    implementation "com.squareup.okhttp3:logging-interceptor:$okhttpVersion"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
+    implementation "androidx.lifecycle:lifecycle-common:$lifecycleVersion"
+    implementation "androidx.lifecycle:lifecycle-runtime:$lifecycleVersion"
+
+    implementation "androidx.room:room-runtime:$roomVersion"
+    kapt "androidx.room:room-compiler:$roomVersion"
+    implementation "androidx.room:room-ktx:$roomVersion"
 }

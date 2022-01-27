@@ -12,28 +12,17 @@
         android:paddingTop="10dp"
         android:paddingBottom="?attr/actionBarSize">
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/user_photo"
-            android:layout_width="96dp"
-            android:layout_height="96dp"
-            android:src="@drawable/placeholder_avatar"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:ignore="MissingConstraints" />
-
         <TextView
             android:id="@+id/user_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:maxLines="2"
             android:paddingTop="10dp"
-            android:text="Петрова Ольга Николаевна"
             android:textColor="@color/black"
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/user_photo"
             tools:ignore="MissingConstraints" />
 
         <TextView
@@ -42,7 +31,6 @@
             android:layout_height="wrap_content"
             android:paddingTop="5dp"
             android:paddingBottom="10dp"
-            android:text="(071) 998-87-54"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -54,31 +42,31 @@
             android:layout_height="wrap_content"
             android:paddingStart="15dp"
             android:paddingTop="15dp"
-            android:text="@string/title_my_appeals"
+            android:text="@string/title_my_requests"
             android:textColor="@color/black"
             android:textSize="16sp"
             app:layout_constraintTop_toBottomOf="@+id/user_number"
             tools:ignore="MissingConstraints" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_appeals"
+            android:id="@+id/rv_requests"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_margin="5dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/title_appeals"
-            tools:listitem="@layout/item_appeal" />
+            tools:listitem="@layout/item_request" />
 
         <ProgressBar
             android:id="@+id/progress_bar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:visibility="invisible"
-            app:layout_constraintBottom_toBottomOf="@+id/rv_appeals"
-            app:layout_constraintEnd_toEndOf="@+id/rv_appeals"
-            app:layout_constraintStart_toStartOf="@+id/rv_appeals"
-            app:layout_constraintTop_toTopOf="@+id/rv_appeals" />
+            app:layout_constraintBottom_toBottomOf="@+id/rv_requests"
+            app:layout_constraintEnd_toEndOf="@+id/rv_requests"
+            app:layout_constraintStart_toStartOf="@+id/rv_requests"
+            app:layout_constraintTop_toTopOf="@+id/rv_requests" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

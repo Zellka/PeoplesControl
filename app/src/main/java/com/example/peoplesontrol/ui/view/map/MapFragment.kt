@@ -4,34 +4,45 @@ import android.Manifest
 import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Bundle
-import android.view.Gravity
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.example.peoplesontrol.R
+import com.example.peoplesontrol.data.api.ApiHelper
+import com.example.peoplesontrol.data.api.RetrofitBuilder
+import com.example.peoplesontrol.data.db.DatabaseBuilder
+import com.example.peoplesontrol.data.db.DatabaseHelperImpl
+import com.example.peoplesontrol.data.model.Request
 import com.example.peoplesontrol.databinding.FragmentMapBinding
+import com.example.peoplesontrol.ui.view.map.DialogRequestFragment.Companion.MAP
+import com.example.peoplesontrol.ui.viewmodel.RequestViewModel
+import com.example.peoplesontrol.ui.viewmodel.ViewModelFactory
+import com.example.peoplesontrol.utils.Error
+import com.example.peoplesontrol.utils.Network
+import com.example.peoplesontrol.utils.Status
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.Marker
-import com.google.android.gms.maps.model.MarkerOptions
-import kotlinx.android.synthetic.main.layout_error.view.*
+import com.google.android.gms.maps.model.*
 
 class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
     private var _binding: FragmentMapBinding? = null
     private val binding get() = _binding!!
 
+    private lateinit var viewModel: RequestViewModel
+
     private lateinit var currentLocation: Location
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
+    private var requests: ArrayList<Request> = arrayListOf()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,9 +54,128 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        fusedLocationProviderClient =
-            LocationServices.getFusedLocationProviderClient(this.requireActivity())
-        fetchLocation()
+        setupViewModel()
+        getRequests()
+    }
+
+    private fun setupViewModel() {
+        viewModel = ViewModelProvider(
+            this,
+            ViewModelFactory(
+                ApiHelper(RetrofitBuilder.apiService),
+                DatabaseHelperImpl(DatabaseBuilder.getInstance(this.requireContext()))
+            )
+        )[RequestViewModel::class.java]
+    }
+
+    private fun getRequests() {
+        if (Network.isConnected(this.requireActivity())) {
+            viewModel.getRequests().observe(this.viewLifecycleOwner, Observer {
+                it?.let { resource ->
+                    when (resource.status) {
+                        Status.SUCCESS -> {
+                            binding.progressBar.visibility = View.GONE
+                            resource.data?.let { requestList -> retrieveData(requestList) }
+                            fusedLocationProviderClient =
+                                LocationServices.getFusedLocationProviderClient(this.requireActivity())
+                            fetchLocation()
+                        }
+                        Status.ERROR -> {
+                            binding.progressBar.visibility = View.GONE
+                            Toast.makeText(
+                                this.requireContext(),
+                                resource.message,
+                                Toast.LENGTH_LONG
+                            )
+                                .show()
+                            Error.showError(this.requireActivity())
+                        }
+                        Status.LOADING -> {
+                            binding.progressBar.visibility = View.VISIBLE
+                        }
+                    }
+                }
+            })
+        } else {
+            viewModel.getRequestsFromDB().observe(this.viewLifecycleOwner, Observer {
+                it?.let { resource ->
+                    when (resource.status) {
+                        Status.SUCCESS -> {
+                            binding.progressBar.visibility = View.GONE
+                            resource.data?.let { requestList -> retrieveData(requestList) }
+                            fusedLocationProviderClient =
+                                LocationServices.getFusedLocationProviderClient(this.requireActivity())
+                            fetchLocation()
+                        }
+                        Status.ERROR -> {
+                            binding.progressBar.visibility = View.GONE
+                            Error.showError(this.requireActivity())
+                        }
+                        Status.LOADING -> {
+                            binding.progressBar.visibility = View.VISIBLE
+                        }
+                    }
+                }
+            })
+            Error.showInternetError(this.requireActivity())
+        }
+    }
+
+    private fun retrieveData(list: List<Request>) {
+        requests.addAll(list.filter { it.deleted_at == null })
+    }
+
+    override fun onMapReady(p0: GoogleMap) {
+        val currentLatLng = LatLng(currentLocation.latitude, currentLocation.longitude)
+        val markerOptions = MarkerOptions().position(currentLatLng)
+            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))
+        p0.addMarker(markerOptions)
+        for (i in requests) {
+            when {
+                i.problem_categories.isEmpty() -> {
+                    p0.addMarker(
+                        MarkerOptions()
+                            .position(LatLng(i.latitude, i.longitude))
+                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET))
+                            .title(i.location)
+                    )
+                }
+                i.problem_categories[0].categoryId % 2 == 0 -> {
+                    p0.addMarker(
+                        MarkerOptions()
+                            .position(LatLng(i.latitude, i.longitude))
+                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
+                            .title(i.location)
+                    )
+                }
+                i.problem_categories[0].categoryId % 3 == 0 -> {
+                    p0.addMarker(
+                        MarkerOptions()
+                            .position(LatLng(i.latitude, i.longitude))
+                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ROSE))
+                            .title(i.location)
+                    )
+                }
+                i.problem_categories[0].categoryId % 5 == 0 -> {
+                    p0.addMarker(
+                        MarkerOptions()
+                            .position(LatLng(i.latitude, i.longitude))
+                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_CYAN))
+                            .title(i.location)
+                    )
+                }
+                else -> {
+                    p0.addMarker(
+                        MarkerOptions()
+                            .position(LatLng(i.latitude, i.longitude))
+                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
+                            .title(i.location)
+                    )
+                }
+            }
+        }
+        p0.moveCamera(CameraUpdateFactory.newLatLng(currentLatLng))
+        p0.setOnMarkerClickListener(this)
     }
 
     private fun fetchLocation() {
@@ -74,14 +204,6 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
         }
     }
 
-    override fun onMapReady(p0: GoogleMap) {
-        val latLng = LatLng(currentLocation.latitude, currentLocation.longitude)
-        val markerOptions = MarkerOptions().position(latLng)
-        p0.animateCamera(CameraUpdateFactory.newLatLng(latLng))
-        p0.animateCamera(CameraUpdateFactory.newLatLng(latLng))
-        p0.addMarker(markerOptions)
-    }
-
     override fun onRequestPermissionsResult(
         requestCode: Int, permissions: Array<String?>,
         grantResults: IntArray
@@ -96,23 +218,10 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
     }
 
     override fun onMarkerClick(p0: Marker): Boolean {
-        val dialogAppealFragment = DialogAppealFragment()
-        dialogAppealFragment.show(childFragmentManager, "MAP")
+        val request = requests.find { request -> request.location == p0.title }
+        val dialogAppealFragment = request?.let { DialogRequestFragment.newInstance(it) }
+        dialogAppealFragment?.show(childFragmentManager, MAP)
         return true
-    }
-
-    private fun showErrorMessage(){
-        val layout: View = activity?.layoutInflater!!.inflate(R.layout.layout_error, null)
-        val text = layout.findViewById<View>(R.id.text_error) as TextView
-        val img = layout.img_error
-        text.text = "Ошибка сервера"
-        text.width = 900
-        img.setImageResource(R.drawable.ic_error)
-        Toast(activity).apply {
-            duration = Toast.LENGTH_LONG
-            this.view = layout
-            setGravity(Gravity.TOP, 0, 0)
-        }.show()
     }
 
     companion object {
