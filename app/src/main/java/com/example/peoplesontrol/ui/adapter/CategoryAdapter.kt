@@ -42,9 +42,8 @@ class CategoryAdapter(private var listener: (Category) -> Unit) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(category: Category) {
             if(category.icon != null) {
-                Picasso.get().load("http://164.92.215.12:8644" + category.icon).centerCrop()
+                Picasso.get().load("http://164.92.215.12:8644" + category.icon)
                     .error(R.drawable.placeholder_category)
-                    .placeholder(R.drawable.placeholder_category)
                     .into(binding.imgCategory)
             }
             binding.titleCategory.text = category.title

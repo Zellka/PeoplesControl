@@ -219,11 +219,12 @@ class NewRequestFragment : Fragment() {
                         ).show()
                     }
                     Status.ERROR -> {
-                        if (resource.message?.contains(resources.getString(R.string.error_401)) == true) {
+                        Toast.makeText(this.requireContext(), resource.message, Toast.LENGTH_SHORT).show()
+                        /*if (resource.message?.contains(resources.getString(R.string.error_401)) == true) {
                             refreshToken()
                         } else {
                             Error.showError(this.requireActivity())
-                        }
+                        }*/
                     }
                 }
             }
@@ -406,6 +407,8 @@ class NewRequestFragment : Fragment() {
         binding.editDescription.setText("")
         adapterPhoto.setData(listOf())
         adapterPhoto.notifyDataSetChanged()
+        adapterVideo.setData(listOf())
+        adapterVideo.notifyDataSetChanged()
     }
 
 
