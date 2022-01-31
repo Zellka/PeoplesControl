@@ -94,11 +94,6 @@ class RequestFragment : Fragment() {
                             }
                             Status.ERROR -> {
                                 binding.progressBar.visibility = View.GONE
-                                Toast.makeText(
-                                    this.requireContext(),
-                                    resource.message,
-                                    Toast.LENGTH_LONG
-                                ).show()
                                 Error.showError(this.requireActivity())
                             }
                             Status.LOADING -> {
@@ -114,6 +109,9 @@ class RequestFragment : Fragment() {
     }
 
     private fun setRequests(list: List<Request>) {
+        if (list.isEmpty()) {
+            binding.listEmpty.visibility = View.VISIBLE
+        }
         val newList = list.filter { it.deleted_at == null }
         adapter.apply {
             when (position) {
@@ -134,7 +132,6 @@ class RequestFragment : Fragment() {
                     setData(sortList)
                 }
             }
-            //setData(newList)
             notifyDataSetChanged()
         }
     }

@@ -12,15 +12,7 @@ data class Category(
     @SerializedName("id")
     @PrimaryKey val categoryId: Int,
     val title: String,
-    val created_at: String,
-    val deleted_at: String?,
-    val updated_at: String,
-    val hash_tag: String,
-    val icon: String?,
-    val is_active: Boolean,
-    val is_visible: Boolean,
-    val mnemonic_name: String,
-    val rating: Int
+    val icon: String?
 ) : Parcelable
 
 data class CategoryResponse(

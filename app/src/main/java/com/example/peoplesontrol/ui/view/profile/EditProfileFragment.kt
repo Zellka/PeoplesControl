@@ -1,6 +1,5 @@
 package com.example.peoplesontrol.ui.view.profile
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -21,6 +20,7 @@ import com.example.peoplesontrol.data.model.Profile
 import com.example.peoplesontrol.data.model.ProfilePost
 import com.example.peoplesontrol.data.model.TokenData
 import com.example.peoplesontrol.databinding.FragmentEditProfileBinding
+import com.example.peoplesontrol.ui.view.SplashActivity
 import com.example.peoplesontrol.ui.view.login.LoginActivity
 import com.example.peoplesontrol.ui.view.profile.ProfileFragment.Companion.PROFILE
 import com.example.peoplesontrol.ui.viewmodel.ProfileViewModel
@@ -58,21 +58,25 @@ class EditProfileFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupViewModel()
         binding.editName.setText(profile?.full_name)
-        binding.editNumber.setText(profile?.phone)
+        binding.editNumber.setText(profile?.phone?.substring(3, 10))
         binding.editEmail.setText(profile?.email)
         if (Network.isConnected(this.requireActivity())) {
             binding.btnOk.setOnClickListener {
-                updateProfile(
-                    ProfilePost(
-                        binding.editName.text.toString(),
-                        "ул.Артёма, 15",
-                        binding.editNumber.text.toString(),
-                        binding.editEmail.text.toString(),
-                        false,
-                        false,
-                        false
+                val phone = binding.editNumber.text.toString().replace("-", "").replace("(", "")
+                    .replace(")", "").replace(" ", "")
+                if (binding.editName.text!!.isNotEmpty() && binding.editNumber.text!!.isNotEmpty() && binding.editEmail.text!!.isNotEmpty()) {
+                    updateProfile(
+                        ProfilePost(
+                            binding.editName.text.toString(),
+                            phone,
+                            binding.editEmail.text.toString()
+                        )
                     )
-                )
+                } else {
+                    binding.inputName.error = resources.getString(R.string.input_error)
+                    binding.inputNumber.error = resources.getString(R.string.input_error)
+                    binding.inputEmail.error = resources.getString(R.string.input_error)
+                }
             }
             binding.btnDeleteProfile.setOnClickListener {
                 showMessage()
@@ -165,10 +169,11 @@ class EditProfileFragment : Fragment() {
                             val sharedPreference = this.requireContext()
                                 .getSharedPreferences("REFRESH_TOKEN", Context.MODE_PRIVATE)
                             sharedPreference.edit().clear().apply()
-                            startActivity(Intent(this.requireContext(), LoginActivity::class.java))
+                            this.requireActivity().finish()
+                            startActivity(Intent(this.requireContext(), SplashActivity::class.java))
                         }
                         Status.ERROR -> {
-                            if (resource.message?.contains("401") == true) {
+                            if (resource.message?.contains(resources.getString(R.string.error_401)) == true) {
                                 refreshToken()
                             } else {
                                 Error.showError(this.requireActivity())

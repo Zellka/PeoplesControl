@@ -33,7 +33,7 @@ object Error {
         Toast(activity).apply {
             duration = Toast.LENGTH_SHORT
             this.view = layout
-            setGravity(Gravity.BOTTOM, 0, 0)
+            setGravity(Gravity.TOP, 0, 0)
         }.show()
     }
 }

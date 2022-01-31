@@ -9,7 +9,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
-        android:layout_marginTop="5dp"
         android:layout_marginEnd="15dp"
         android:layout_marginBottom="15dp"
         android:paddingBottom="70dp"
@@ -36,53 +35,53 @@
             app:layout_constraintEnd_toEndOf="parent"
             tools:ignore="MissingConstraints" />
 
-        <ImageSwitcher
-            android:id="@+id/images_request"
+        <ImageView
+            android:id="@+id/image"
             android:layout_width="match_parent"
             android:layout_height="180dp"
-            android:layout_margin="10dp"
+            android:layout_marginTop="20dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/title_requests"
             app:layout_constraintTop_toBottomOf="@+id/status_request"
             tools:ignore="MissingConstraints" />
 
-        <ImageView
-            android:id="@+id/btn_prev"
-            android:layout_width="50dp"
-            android:layout_height="200dp"
-            android:layout_marginStart="10dp"
-            android:src="@drawable/ic_arrow_left"
-            app:layout_constraintBottom_toBottomOf="@+id/images_request"
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:ellipsize="end"
+            android:maxLines="3"
+            android:text="Скопление бродячих животных"
+            android:textColor="@color/black"
+            android:textIsSelectable="true"
+            android:textSize="24dp"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/images_request" />
-
-        <ImageView
-            android:id="@+id/btn_next"
-            android:layout_width="50dp"
-            android:layout_height="200dp"
-            android:layout_marginEnd="10dp"
-            android:src="@drawable/ic_arrow_right"
-            app:layout_constraintBottom_toBottomOf="@+id/images_request"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/images_request" />
+            app:layout_constraintTop_toBottomOf="@+id/image"
+            tools:ignore="MissingConstraints" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/title_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             android:text="@string/title_description"
+            android:textSize="12dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/images_request"
+            app:layout_constraintTop_toBottomOf="@+id/category"
             tools:ignore="MissingConstraints" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/id_request"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             android:layout_marginEnd="10dp"
             android:text="№1022"
+            android:textSize="12dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/images_request"
+            app:layout_constraintTop_toBottomOf="@+id/category"
             tools:ignore="MissingConstraints" />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -90,10 +89,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            android:lineSpacingExtra="5dp"
             android:maxLines="5"
-            android:text="Много описания здесь очень много описаниея рвор вороряорос яос ыорфы ыфораф афа 7к  афоар рлфа рфла флыа флафлыафларфыафлыа"
+            android:text="Много описания здесь очень много описания"
             android:textColor="@color/black"
-            android:textSize="16dp"
+            android:textIsSelectable="true"
+            android:textSize="14dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/title_description"
             tools:ignore="MissingConstraints" />
@@ -104,6 +105,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:text="@string/title_address"
+            android:textSize="12dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/description_request"
             tools:ignore="MissingConstraints" />
@@ -113,10 +115,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:maxLines="1"
+            android:ellipsize="end"
+            android:lineSpacingExtra="5dp"
+            android:maxLines="4"
             android:text="г.Донецк, ул.Артёма, 56/7"
             android:textColor="@color/black"
-            android:textSize="16dp"
+            android:textIsSelectable="true"
+            android:textSize="14dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/title_address"
             tools:ignore="MissingConstraints" />
@@ -127,6 +132,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:text="@string/title_date"
+            android:textSize="12dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/address_request"
             tools:ignore="MissingConstraints" />
@@ -139,7 +145,7 @@
             android:maxLines="1"
             android:text="14.01.21 14:56"
             android:textColor="@color/black"
-            android:textSize="16dp"
+            android:textSize="14dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/title_date"
             tools:ignore="MissingConstraints" />
@@ -173,7 +179,7 @@
             android:id="@+id/btn_add_request"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="20dp"
             android:background="@drawable/round_gradient"
             android:text="@string/btn_add_appeal"
             android:textColor="@color/white"

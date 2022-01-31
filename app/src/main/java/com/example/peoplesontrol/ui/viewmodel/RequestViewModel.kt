@@ -10,6 +10,8 @@ import com.example.peoplesontrol.data.model.RequestPost
 import com.example.peoplesontrol.data.repository.RequestRepository
 import com.example.peoplesontrol.utils.Resource
 import kotlinx.coroutines.Dispatchers
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 
 class RequestViewModel(
     private val repository: RequestRepository
@@ -65,14 +67,16 @@ class RequestViewModel(
         }
     }
 
-    fun createRequest(request: RequestPost) = liveData(Dispatchers.IO) {
-        emit(Resource.loading(data = null))
-        try {
-            emit(Resource.success(data = repository.createRequest(request)))
-        } catch (exception: Exception) {
-            emit(Resource.error(data = null, message = exception.message ?: "Error"))
+    fun createRequest(request: RequestPost, files: HashMap<String, Array<RequestBody>>) =
+        liveData(Dispatchers.IO) {
+            emit(Resource.loading(data = null))
+            try {
+                emit(Resource.success(data = repository.createRequest(request, files)))
+            } catch (exception: Exception) {
+                emit(Resource.error(data = null, message = exception.message ?: "Error"))
+            }
         }
-    }
+
 
     fun watchRequest(id: Long) = liveData(Dispatchers.IO) {
         emit(Resource.loading(data = null))

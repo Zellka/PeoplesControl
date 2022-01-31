@@ -1,5 +1,7 @@
 package com.example.peoplesontrol.ui.viewmodel
 
+import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.liveData
@@ -9,6 +11,8 @@ import com.example.peoplesontrol.data.model.*
 import com.example.peoplesontrol.data.repository.ProfileRepository
 import com.example.peoplesontrol.utils.Resource
 import kotlinx.coroutines.Dispatchers
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 
 class ProfileViewModel(
     private val repository: ProfileRepository
@@ -77,14 +81,15 @@ class ProfileViewModel(
         }
     }
 
-    fun createRequest(request: RequestPost) = liveData(Dispatchers.IO) {
-        emit(Resource.loading(data = null))
-        try {
-            emit(Resource.success(data = repository.createRequest(request)))
-        } catch (exception: Exception) {
-            emit(Resource.error(data = null, message = exception.message ?: "Error"))
+    fun createRequest(request: RequestPost, files: HashMap<String, Array<RequestBody>>) =
+        liveData(Dispatchers.IO) {
+            emit(Resource.loading(data = null))
+            try {
+                emit(Resource.success(data = repository.createRequest(request, files)))
+            } catch (exception: Exception) {
+                emit(Resource.error(data = null, message = exception.message ?: "Error"))
+            }
         }
-    }
 
     fun updateRequest(id: Long, request: RequestPost) = liveData(Dispatchers.IO) {
         emit(Resource.loading(data = null))

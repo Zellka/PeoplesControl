@@ -3,6 +3,8 @@ package com.example.peoplesontrol.data.repository
 import com.example.peoplesontrol.data.api.ApiHelper
 import com.example.peoplesontrol.data.db.DatabaseHelper
 import com.example.peoplesontrol.data.model.*
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 
 class ProfileRepository(private val apiHelper: ApiHelper, private val dbHelper: DatabaseHelper) {
 
@@ -12,7 +14,8 @@ class ProfileRepository(private val apiHelper: ApiHelper, private val dbHelper: 
 
     suspend fun signup(signup: Signup) = apiHelper.signup(signup)
 
-    suspend fun refreshToken(message: Message, token: String) = apiHelper.refreshToken(message, token)
+    suspend fun refreshToken(message: Message, token: String) =
+        apiHelper.refreshToken(message, token)
 
     suspend fun getProfile() = apiHelper.getProfile()
 
@@ -31,5 +34,7 @@ class ProfileRepository(private val apiHelper: ApiHelper, private val dbHelper: 
 
     suspend fun deleteRequest(id: Long) = apiHelper.deleteRequest(id)
 
-    suspend fun createRequest(request: RequestPost) = apiHelper.createRequest(request)
+    suspend fun createRequest(request: RequestPost, files: HashMap<String, Array<RequestBody>>) =
+        apiHelper.createRequest(request, files)
+
 }

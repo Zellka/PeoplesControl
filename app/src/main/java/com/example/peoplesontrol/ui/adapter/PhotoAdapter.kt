@@ -6,7 +6,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.peoplesontrol.databinding.ItemPhotoBinding
 
-class PhotoAdapter : RecyclerView.Adapter<PhotoAdapter.PhotoHolder>() {
+class PhotoAdapter(private var listener: (Int) -> Unit) :
+    RecyclerView.Adapter<PhotoAdapter.PhotoHolder>() {
 
     private var photos = mutableListOf<Uri?>()
 
@@ -15,16 +16,17 @@ class PhotoAdapter : RecyclerView.Adapter<PhotoAdapter.PhotoHolder>() {
         return PhotoHolder(binding)
     }
 
-    override fun getItemCount() = photos.size
-
     override fun onBindViewHolder(holder: PhotoHolder, position: Int) {
-        holder.bind(photos[position])
+        holder.bind(photos[position], position)
     }
 
     inner class PhotoHolder(var binding: ItemPhotoBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(uri: Uri?) {
+        fun bind(uri: Uri?, position: Int) {
             binding.photo.setImageURI(uri)
+            binding.btnDelete.setOnClickListener {
+                listener(position)
+            }
         }
     }
 
@@ -33,4 +35,12 @@ class PhotoAdapter : RecyclerView.Adapter<PhotoAdapter.PhotoHolder>() {
         photos.addAll(newData)
         notifyDataSetChanged()
     }
+
+    fun removeItem(position: Int) {
+        photos.removeAt(position)
+        notifyItemRemoved(position)
+        notifyItemRangeChanged(position, photos.size)
+    }
+
+    override fun getItemCount() = photos.size
 }

@@ -56,41 +56,19 @@
     <fragment
         android:id="@+id/navigation_edit_request"
         android:name="com.example.peoplesontrol.ui.view.request.EditRequestFragment"
-        android:label="@string/title_edit_profile"
-        tools:layout="@layout/fragment_edit_request" />
+        android:label="@string/title_request"
+        tools:layout="@layout/fragment_edit_request" >
+        <action
+            android:id="@+id/action_editRequestFragment_to_profileFragment"
+            app:destination="@id/navigation_profile" />
+
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_transport"
         android:name="com.example.peoplesontrol.ui.view.transport.TimetableFragment"
         android:label="@string/title_transport"
-        tools:layout="@layout/fragment_timetable">
-        <action
-            android:id="@+id/action_transportFragment_to_busFragment"
-            app:destination="@id/navigation_bus" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/navigation_city"
-        android:name="com.example.peoplesontrol.ui.view.transport.SelectCityFragment"
-        android:label="@string/title_city"
-        tools:layout="@layout/fragment_select_city">
-        <action
-            android:id="@+id/action_cityFragment_to_busFragment"
-            app:destination="@id/navigation_bus" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/navigation_bus"
-        android:name="com.example.peoplesontrol.ui.view.transport.SelectBusFragment"
-        android:label="@string/title_bus"
-        tools:layout="@layout/fragment_select_bus">
-        <action
-            android:id="@+id/action_busFragment_to_transportFragment"
-            app:destination="@id/navigation_transport" />
-        <action
-            android:id="@+id/action_busFragment_to_cityFragment"
-            app:destination="@id/navigation_city" />
-    </fragment>
+        tools:layout="@layout/fragment_timetable"/>
 
     <fragment
         android:id="@+id/navigation_profile"

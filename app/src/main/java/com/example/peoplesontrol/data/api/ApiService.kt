@@ -1,6 +1,7 @@
 package com.example.peoplesontrol.data.api
 
 import com.example.peoplesontrol.data.model.*
+import okhttp3.RequestBody
 import retrofit2.http.*
 
 interface ApiService {
@@ -14,9 +15,11 @@ interface ApiService {
     @GET("requests")
     suspend fun getRequests(): RequestResponse
 
+    @Multipart
     @POST("requests")
     suspend fun createRequest(
-        @Body request: RequestPost,
+        @Part("json_data") json_data: RequestPost,
+        @PartMap files: HashMap<String, Array<RequestBody>>,
         @Header("Authorization") token: String = "Bearer " + Data.token.accessToken
     ): Request
 

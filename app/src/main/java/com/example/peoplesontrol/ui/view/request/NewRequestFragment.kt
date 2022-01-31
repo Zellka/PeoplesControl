@@ -28,14 +28,21 @@ import com.example.peoplesontrol.ui.viewmodel.ViewModelFactory
 import com.example.peoplesontrol.utils.Status
 import java.util.*
 import android.widget.AdapterView
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.peoplesontrol.R
 import com.example.peoplesontrol.data.db.DatabaseBuilder
 import com.example.peoplesontrol.data.db.DatabaseHelperImpl
 import com.example.peoplesontrol.data.model.*
+import com.example.peoplesontrol.ui.adapter.VideoAdapter
 import com.example.peoplesontrol.ui.view.login.LoginActivity
 import com.example.peoplesontrol.utils.Error
 import com.example.peoplesontrol.utils.Network
 import com.google.android.gms.maps.model.LatLng
+import java.io.File
+import okhttp3.RequestBody
+import okhttp3.MediaType
+import kotlin.collections.HashMap
+import com.example.peoplesontrol.utils.FileUtils
 
 class NewRequestFragment : Fragment() {
 
@@ -45,10 +52,14 @@ class NewRequestFragment : Fragment() {
     private lateinit var viewModel: RequestViewModel
 
     private lateinit var adapterPhoto: PhotoAdapter
+    private lateinit var adapterVideo: VideoAdapter
     private var photos = arrayListOf<Uri?>()
+    private var videos = arrayListOf<String?>()
+    private var uriList = arrayListOf<Uri>()
 
     private var categories = mutableListOf<Category>()
     private var titleCategories = mutableListOf<String>()
+    private var fileUtils = FileUtils()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -64,14 +75,17 @@ class NewRequestFragment : Fragment() {
         getCategories()
         setupUI()
         binding.btnAddPhoto.setOnClickListener {
-            addPhoto()
+            addMedia(false)
+        }
+        binding.btnAddVideo.setOnClickListener {
+            addMedia(true)
         }
         binding.btnAddMarker.setOnClickListener {
             val mapFragment = AddLatLngFragment()
-            mapFragment.show(childFragmentManager, "MAP")
+            mapFragment.show(childFragmentManager, TAG_MAP)
         }
-        var chooseCategory: String = ""
-        binding.editCategory.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+        var chooseCategory = ""
+        binding.menuCategory.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
                 parent: AdapterView<*>?,
                 itemSelected: View, selectedItemPosition: Int, selectedId: Long
@@ -85,32 +99,36 @@ class NewRequestFragment : Fragment() {
         var latLng: LatLng? = null
         binding.btnSend.setOnClickListener {
             if (Network.isConnected(this.requireActivity())) {
-                val category = categories.find { it.title == chooseCategory }
-                val categoriesId = mutableListOf<Int>()
-                category?.let { categoriesId.add(it.categoryId) }
-                val array: Array<Int> = categoriesId.toTypedArray()
-                if (Data.point != null) {
-                    currentAddress = getAddress()
-                    latLng = Data.point
-                    Data.point = null
-                } else {
-                    currentAddress =
-                        binding.editCity.text.toString() + " " + binding.editStreet.text.toString() + " " + binding.editHouse.text.toString()
-                    latLng = getLatLng(currentAddress)
-                }
-                createRequest(
-                    RequestPost(
-                        null,
-                        null,
-                        array,
-                        binding.editDescription.text.toString(),
-                        resources.getString(R.string.source),
-                        0,
-                        currentAddress,
-                        latLng!!.latitude,
-                        latLng!!.longitude
+                if(isDataNotEmpty()) {
+                    val category = categories.find { it.title == chooseCategory }
+                    val categoriesId = mutableListOf<Int>()
+                    category?.let { categoriesId.add(it.categoryId) }
+                    val array: Array<Int> = categoriesId.toTypedArray()
+                    if (Data.point != null) {
+                        currentAddress = getAddress()
+                        latLng = Data.point
+                        Data.point = null
+                    } else {
+                        currentAddress = binding.editAddress.text.toString()
+                        latLng = getLatLng(currentAddress)
+                    }
+                    createRequest(
+                        RequestPost(
+                            null,
+                            null,
+                            array,
+                            binding.editDescription.text.toString(),
+                            resources.getString(R.string.source),
+                            0,
+                            currentAddress,
+                            latLng!!.latitude,
+                            latLng!!.longitude
+                        )
                     )
-                )
+                } else {
+                    binding.inputDescription.error = resources.getString(R.string.input_error)
+                    binding.inputAddress.error = resources.getString(R.string.input_error)
+                }
             } else {
                 Error.showInternetError(this.requireActivity())
             }
@@ -144,10 +162,16 @@ class NewRequestFragment : Fragment() {
 
     private fun setupUI() {
         binding.rvPhotos.layoutManager = GridLayoutManager(this.requireContext(), 3)
-        adapterPhoto = PhotoAdapter()
+        adapterPhoto = PhotoAdapter { position: Int -> removePhoto(position) }
+        binding.rvVideos.layoutManager = LinearLayoutManager(this.requireContext())
+        adapterVideo = VideoAdapter { position: Int -> removeVideo(position) }
     }
 
-    private fun addPhoto() {
+    private fun isDataNotEmpty(): Boolean {
+        return binding.editDescription.text!!.isNotEmpty() && (binding.editAddress.text!!.isNotEmpty() || Data.point != null)
+    }
+
+    private fun addMedia(isVideo: Boolean) {
         if (ActivityCompat.checkSelfPermission(
                 this.requireContext(),
                 Manifest.permission.READ_EXTERNAL_STORAGE
@@ -157,12 +181,33 @@ class NewRequestFragment : Fragment() {
             val permissions = arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE)
             requestPermissions(permissions, PERMISSION_CODE)
         } else {
-            pickImageFromGallery()
+            if (isVideo) {
+                pickVideoFromGallery()
+            } else {
+                pickImageFromGallery()
+            }
         }
     }
 
+    private fun removePhoto(position: Int) {
+        photos.removeAt(position)
+        adapterPhoto.removeItem(position)
+    }
+
+
+    private fun removeVideo(position: Int) {
+        videos.removeAt(position)
+        adapterVideo.removeItem(position)
+    }
+
     private fun createRequest(request: RequestPost) {
-        viewModel.createRequest(request).observe(this.viewLifecycleOwner, Observer {
+        val list: MutableList<RequestBody> = ArrayList()
+        for (uri in uriList) {
+            list.add(prepareFiles(uri))
+        }
+        val map: HashMap<String, Array<RequestBody>> = hashMapOf()
+        map["files"] = list.toTypedArray()
+        viewModel.createRequest(request, map).observe(this.viewLifecycleOwner, Observer {
             it?.let { resource ->
                 when (resource.status) {
                     Status.SUCCESS -> {
@@ -174,7 +219,7 @@ class NewRequestFragment : Fragment() {
                         ).show()
                     }
                     Status.ERROR -> {
-                        if (resource.message?.contains("401") == true) {
+                        if (resource.message?.contains(resources.getString(R.string.error_401)) == true) {
                             refreshToken()
                         } else {
                             Error.showError(this.requireActivity())
@@ -186,27 +231,30 @@ class NewRequestFragment : Fragment() {
     }
 
     private fun getCategories() {
-        viewModel.getCategories().observe(this.viewLifecycleOwner, Observer {
-            it?.let { resource ->
-                when (resource.status) {
-                    Status.SUCCESS -> {
-                        resource.data?.let { categories -> setCategories(categories) }
-                        val adapter: ArrayAdapter<String> =
-                            ArrayAdapter(
-                                this.requireContext(),
-                                android.R.layout.simple_spinner_item,
-                                titleCategories
-                            )
-                        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                        binding.editCategory.adapter = adapter
-                    }
-                    Status.ERROR -> {
-                        Toast.makeText(this.requireContext(), resource.message, Toast.LENGTH_LONG)
-                            .show()
+        if (Network.isConnected(this.requireActivity())) {
+            viewModel.getCategories().observe(this.viewLifecycleOwner, Observer {
+                it?.let { resource ->
+                    when (resource.status) {
+                        Status.SUCCESS -> {
+                            resource.data?.let { categories -> setCategories(categories) }
+                            val adapter: ArrayAdapter<String> =
+                                ArrayAdapter(
+                                    this.requireContext(),
+                                    android.R.layout.simple_spinner_item,
+                                    titleCategories
+                                )
+                            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                            binding.menuCategory.adapter = adapter
+                        }
+                        Status.ERROR -> {
+                            Error.showError(this.requireActivity())
+                        }
                     }
                 }
-            }
-        })
+            })
+        } else {
+            Error.showInternetError(this.requireActivity())
+        }
     }
 
     private fun setCategories(list: List<Category>) {
@@ -226,7 +274,10 @@ class NewRequestFragment : Fragment() {
                             .getSharedPreferences("REFRESH_TOKEN", Context.MODE_PRIVATE)
                         val editor = sharedPreference.edit()
                         editor.clear()
-                        editor.putString("refreshToken", Data.token.refreshToken)
+                        editor.putString(
+                            resources.getString(R.string.token_name),
+                            Data.token.refreshToken
+                        )
                         editor.apply()
                         Toast.makeText(
                             this.requireContext(),
@@ -253,13 +304,16 @@ class NewRequestFragment : Fragment() {
     ) {
         when (requestCode) {
             PERMISSION_CODE -> {
-                if (grantResults.size > 0 && grantResults[0] ==
+                if (grantResults.isNotEmpty() && grantResults[0] ==
                     PackageManager.PERMISSION_GRANTED
                 ) {
                     pickImageFromGallery()
                 } else {
-                    Toast.makeText(this.requireContext(), "Permission denied", Toast.LENGTH_SHORT)
-                        .show()
+                    Toast.makeText(
+                        this.requireContext(),
+                        resources.getString(R.string.error_permission),
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
         }
@@ -273,33 +327,100 @@ class NewRequestFragment : Fragment() {
         startActivityForResult(intent, IMAGE_PICK_CODE)
     }
 
+
+    private fun pickVideoFromGallery() {
+        val intent = Intent()
+        intent.type = "video/*"
+        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
+        intent.action = Intent.ACTION_GET_CONTENT
+        startActivityForResult(intent, VIDEO_PICK_CODE)
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (resultCode == Activity.RESULT_OK && requestCode == IMAGE_PICK_CODE) {
-            if (data?.clipData != null) {
-                val count = data.clipData?.itemCount
-                binding.rvPhotos.visibility = View.VISIBLE
-                for (i in 0 until count!!) {
+        if (resultCode == Activity.RESULT_OK && requestCode == IMAGE_PICK_CODE && data != null) {
+            binding.rvPhotos.visibility = View.VISIBLE
+            if (data.clipData != null) {
+                val count = data.clipData!!.itemCount
+                for (i in 0 until count) {
                     val imageUri = data.clipData?.getItemAt(i)?.uri
+                    val imagePath: String = imageUri?.let {
+                        fileUtils.getPath(
+                            this.requireContext(),
+                            it
+                        ).toString()
+                    }.toString()
+                    uriList.add(Uri.parse(imagePath))
                     photos.add(imageUri)
+                    adapterPhoto.setData(photos)
+                    binding.rvPhotos.adapter = adapterPhoto
                 }
+            } else {
+                val imagePath: String = data.data?.let {
+                    fileUtils.getPath(
+                        this.requireContext(),
+                        it
+                    ).toString()
+                }.toString()
+                uriList.add(Uri.parse(imagePath))
+                photos.add(data.data)
                 adapterPhoto.setData(photos)
                 binding.rvPhotos.adapter = adapterPhoto
+            }
+        }
+        if (resultCode == Activity.RESULT_OK && requestCode == VIDEO_PICK_CODE && data != null) {
+            binding.rvVideos.visibility = View.VISIBLE
+            if (data.clipData != null) {
+                val count = data.clipData!!.itemCount
+                for (i in 0 until count) {
+                    val videoUri = data.clipData?.getItemAt(i)?.uri
+                    val videoPath: String = videoUri?.let {
+                        fileUtils.getPath(
+                            this.requireContext(),
+                            it
+                        ).toString()
+                    }.toString()
+                    uriList.add(Uri.parse(videoPath))
+                    val file = File(Uri.parse(videoPath).path)
+                    videos.add(file.name)
+                    adapterVideo.setData(videos)
+                    binding.rvVideos.adapter = adapterVideo
+                }
+            } else {
+                val videoPath: String = data.data?.let {
+                    fileUtils.getPath(
+                        this.requireContext(),
+                        it
+                    ).toString()
+                }.toString()
+                uriList.add(Uri.parse(videoPath))
+                val file = File(Uri.parse(videoPath).path)
+                videos.add(file.name)
+                adapterVideo.setData(videos)
+                binding.rvVideos.adapter = adapterVideo
             }
         }
     }
 
     private fun clearEditText() {
-        binding.editCity.setText("")
+        binding.editAddress.setText("")
         binding.editDescription.setText("")
-        binding.editStreet.setText("")
-        binding.editHouse.setText("")
-        binding.editVideo.setText("")
         adapterPhoto.setData(listOf())
         adapterPhoto.notifyDataSetChanged()
     }
 
+
+    private fun prepareFiles(fileUri: Uri): RequestBody {
+        val file = File(fileUri.path)
+        return RequestBody.create(
+            MediaType.parse(resources.getString(R.string.header_multipart)),
+            file
+        )
+    }
+
     companion object {
+        private const val TAG_MAP = "MAP"
         private const val IMAGE_PICK_CODE = 1000
+        private const val VIDEO_PICK_CODE = 1002
         private const val PERMISSION_CODE = 1001
     }
 }

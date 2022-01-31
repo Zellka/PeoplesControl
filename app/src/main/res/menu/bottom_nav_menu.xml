@@ -17,9 +17,9 @@
         android:title="@string/title_new_request" />
 
     <item
-        android:id="@+id/navigation_city"
+        android:id="@+id/navigation_transport"
         android:icon="@drawable/ic_bus"
-        android:title="@string/title_city" />
+        android:title="@string/title_transport" />
 
     <item
         android:id="@+id/navigation_profile"

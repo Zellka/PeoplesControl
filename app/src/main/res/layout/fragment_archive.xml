@@ -15,10 +15,16 @@
         tools:ignore="MissingConstraints"
         tools:listitem="@layout/item_request" />
 
-    <ProgressBar
-        android:id="@+id/progress_bar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/list_empty"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_margin="20dp"
+        android:gravity="center"
+        android:padding="20dp"
+        android:text="@string/list_empty"
+        android:textColor="@color/black"
+        android:textSize="24dp"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

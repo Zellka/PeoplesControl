@@ -8,7 +8,7 @@
     <string name="input_password">Пароль</string>
     <string name="input_name">Ф.И.О.</string>
     <string name="input_email">Email</string>
-    <string name="title_city">Выберите город</string>
+    <string name="title_city">Город:</string>
     <string name="title_login">Вход</string>
     <string name="title_no_auth"><u>Зарегистрироваться</u></string>
     <string name="title_categories">Сферы</string>
@@ -28,13 +28,13 @@
     <string name="input_video">Ссылка на видео</string>
     <string name="title_transport">Расписание транспорта</string>
     <string name="google_maps_key">api_key</string>
-    <string name="title_bus">Выберите маршрут</string>
+    <string name="title_bus">Маршрут:</string>
     <string name="btn_check_timetable">Проверить расписание</string>
     <string name="btn_add_appeal">Добавить к заявке</string>
     <string name="input_error">Обязательно поле</string>
     <string name="btn_add_photo">Загрузить фотографии</string>
     <string name="input_category">Категория</string>
-    <string name="forward_direction">Прямое</string>
+    <string name="forward_direction">Прямое направление</string>
     <string name="reverse_direction">Обратное</string>
     <string name="title_request">Заявка</string>
     <string name="btn_show_on_map"><u>На карте</u></string>
@@ -44,9 +44,6 @@
     <string name="title_video">Видео:</string>
     <string name="title_edit_profile">Редактировать</string>
     <string name="title_num_request">Количество заявок:</string>
-    <string name="input_house">Дом</string>
-    <string name="input_street">Улица</string>
-    <string name="input_city">Город</string>
     <string name="success_signup">Вы зарегистрированы</string>
     <string name="success_logout">Вы вышли</string>
     <string name="success_remove">Удалено</string>
@@ -65,4 +62,21 @@
     <string name="btn_filter_requests">Фильтр по категориям</string>
     <string name="btn_all_category">Все</string>
     <string name="btn_add_marker">Отметить на карте</string>
+    <string name="btn_add_video">Загрузить видео</string>
+    <string name="save_video">Видео сохранены</string>
+    <string name="header_multipart">multipart/form-data</string>
+    <string name="token_name">refreshToken</string>
+    <string name="error_401">401</string>
+    <string name="save_address">Адрес сохранён</string>
+    <string name="input_login">Логин</string>
+    <string name="btn_next">Начать</string>
+    <string name="app_description">Благополучие граждан превыше всего!</string>
+    <string name="btn_login">Войти</string>
+    <string name="btn_auth">Зарегистрироваться</string>
+    <string name="motivation_auth">Есть проблемы? Решим!</string>
+    <string name="motivation_login">Оставь заявку! Помоги городу!</string>
+    <string name="title_category">Категория:</string>
+    <string name="title_bus_stations">Остановка</string>
+    <string name="error_password">Пароль не менее 8 символов</string>
+    <string name="list_empty">Список пока пуст</string>
 </resources>

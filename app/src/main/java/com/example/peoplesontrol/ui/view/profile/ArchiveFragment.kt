@@ -44,10 +44,13 @@ class ArchiveFragment : Fragment() {
         binding.rvRequests.layoutManager = LinearLayoutManager(this.requireContext())
         adapter = RequestAdapter { appeal: Request, isAdd: Boolean -> showRequest(appeal, isAdd) }
         if (profile?.requests?.isNotEmpty() == true) {
+            binding.listEmpty.visibility = View.INVISIBLE
             adapter.apply {
                 profile?.requests?.filter { it.deleted_at != null }?.let { setData(it) }
                 notifyDataSetChanged()
             }
+        } else {
+            binding.listEmpty.visibility = View.VISIBLE
         }
         binding.rvRequests.adapter = adapter
     }

@@ -51,16 +51,18 @@ class LoginFragment : Fragment() {
             findNavController().navigate(R.id.action_loginFragment_to_registrationFragment)
         }
         binding.btnLogin.setOnClickListener {
-            if(Network.isConnected(this.requireActivity())) {
-                if (binding.editNumber.text!!.isNotEmpty() && binding.editPassword.text!!.isNotEmpty()) {
+            if (Network.isConnected(this.requireActivity())) {
+                val phone = binding.editLogin.text.toString().replace("-", "").replace("(", "")
+                    .replace(")", "").replace(" ", "")
+                if (binding.editLogin.text!!.isNotEmpty() && binding.editPassword.text!!.isNotEmpty()) {
                     login(
                         Login(
-                            binding.editNumber.text.toString(),
+                            phone,
                             binding.editPassword.text.toString()
                         )
                     )
                 } else {
-                    binding.inputNumber.error = resources.getString(R.string.input_error)
+                    binding.inputLogin.error = resources.getString(R.string.input_error)
                     binding.inputPassword.error = resources.getString(R.string.input_error)
                 }
             } else {
@@ -89,8 +91,6 @@ class LoginFragment : Fragment() {
                         startActivity(Intent(this.requireContext(), MainActivity::class.java))
                     }
                     Status.ERROR -> {
-                        Toast.makeText(this.requireContext(), resource.message, Toast.LENGTH_LONG)
-                            .show()
                         Error.showError(this.requireActivity())
                     }
                 }
@@ -100,17 +100,18 @@ class LoginFragment : Fragment() {
 
     private fun setTokens(tokens: TokenData) {
         Data.token = tokens
-        val sharedPreference =  this.requireContext().getSharedPreferences("REFRESH_TOKEN", Context.MODE_PRIVATE)
+        val sharedPreference =
+            this.requireContext().getSharedPreferences("REFRESH_TOKEN", Context.MODE_PRIVATE)
         val editor = sharedPreference.edit()
         editor.clear()
-        editor.putString("refreshToken", Data.token.refreshToken)
+        editor.putString(resources.getString(R.string.token_name), Data.token.refreshToken)
         editor.apply()
     }
 
     private fun setupEditTextListener() {
-        binding.editNumber.addTextChangedListener(object : TextWatcher {
+        binding.editLogin.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable) {
-                binding.inputNumber.error = null
+                binding.inputLogin.error = null
             }
 
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) =

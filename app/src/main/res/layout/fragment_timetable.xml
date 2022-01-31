@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="20dp"
+    android:layout_margin="5dp"
+    android:paddingBottom="80dp"
     tools:context=".ui.view.transport.TimetableFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -19,19 +20,62 @@
             android:layout_margin="10dp"
             tools:ignore="MissingConstraints" />
 
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/title_regions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="@string/title_city"
+            android:textSize="14dp"
+            app:layout_constraintTop_toBottomOf="@+id/map"
+            tools:ignore="MissingConstraints" />
+
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/regions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:paddingTop="10dp"
+            android:paddingEnd="10dp"
+            android:paddingBottom="10dp"
+            app:layout_constraintTop_toBottomOf="@+id/title_regions"
+            tools:ignore="MissingConstraints" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/title_bus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="@string/title_bus"
+            android:textSize="14dp"
+            app:layout_constraintTop_toBottomOf="@+id/regions"
+            tools:ignore="MissingConstraints" />
+
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/bus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:paddingTop="10dp"
+            android:paddingEnd="10dp"
+            android:paddingBottom="15dp"
+            app:layout_constraintTop_toBottomOf="@+id/title_bus"
+            tools:ignore="MissingConstraints" />
+
         <RadioGroup
             android:id="@+id/directions"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
             android:orientation="horizontal"
-            app:layout_constraintTop_toBottomOf="@+id/map"
+            app:layout_constraintTop_toBottomOf="@+id/bus"
             tools:ignore="MissingConstraints">
 
             <RadioButton
                 android:id="@+id/forward_direction"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_margin="5dp"
                 android:background="@drawable/radio_selector"
                 android:button="@android:color/transparent"
                 android:checked="true"
@@ -43,7 +87,7 @@
                 android:id="@+id/reverse_direction"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_margin="5dp"
                 android:background="@drawable/radio_selector"
                 android:button="@android:color/transparent"
                 android:padding="15dp"
@@ -52,13 +96,25 @@
 
         </RadioGroup>
 
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/title_bus_stations"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:paddingTop="10dp"
+            android:text="@string/title_bus_stations"
+            android:textSize="14dp"
+            app:layout_constraintTop_toBottomOf="@+id/directions"
+            tools:ignore="MissingConstraints" />
+
         <androidx.appcompat.widget.AppCompatSpinner
             android:id="@+id/bus_stations"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:padding="10dp"
-            app:layout_constraintTop_toBottomOf="@+id/directions"
+            android:paddingTop="10dp"
+            android:paddingEnd="10dp"
+            android:paddingBottom="10dp"
+            app:layout_constraintTop_toBottomOf="@+id/title_bus_stations"
             tools:ignore="MissingConstraints" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -73,7 +129,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:paddingStart="10dp"
                 android:text="Время:"
                 android:textSize="16dp"
                 tools:ignore="MissingConstraints" />
@@ -119,8 +174,8 @@
             android:id="@+id/title_my_time"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:padding="10dp"
+            android:layout_margin="5dp"
+            android:paddingStart="10dp"
             android:text="Прибытие ближайшего маршрута:"
             android:textSize="16dp"
             android:visibility="invisible"
@@ -131,23 +186,13 @@
             android:id="@+id/time_station"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
+            android:layout_margin="5dp"
             android:paddingStart="10dp"
             android:paddingTop="5dp"
             android:textColor="@color/black"
             android:textSize="20dp"
             app:layout_constraintTop_toBottomOf="@+id/title_my_time"
             tools:ignore="MissingConstraints" />
-
-        <ProgressBar
-            android:id="@+id/progress_bar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

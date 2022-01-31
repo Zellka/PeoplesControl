@@ -1,6 +1,8 @@
 package com.example.peoplesontrol.data.api
 
 import com.example.peoplesontrol.data.model.*
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 
 class ApiHelper(private val apiService: ApiService) {
 
@@ -12,7 +14,9 @@ class ApiHelper(private val apiService: ApiService) {
 
     suspend fun watchRequest(id: Long) = apiService.watchRequest(id)
 
-    suspend fun createRequest(request: RequestPost) = apiService.createRequest(request)
+    suspend fun createRequest(request: RequestPost, files: HashMap<String, Array<RequestBody>>) =
+        apiService.createRequest(request, files)
+
 
     suspend fun updateRequest(id: Long, request: RequestPost) =
         apiService.updateRequest(id, request)

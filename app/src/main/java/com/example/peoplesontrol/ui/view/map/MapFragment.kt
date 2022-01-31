@@ -1,15 +1,10 @@
 package com.example.peoplesontrol.ui.view.map
 
-import android.Manifest
-import android.content.pm.PackageManager
-import android.location.Location
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.core.app.ActivityCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.peoplesontrol.R
@@ -25,8 +20,6 @@ import com.example.peoplesontrol.ui.viewmodel.ViewModelFactory
 import com.example.peoplesontrol.utils.Error
 import com.example.peoplesontrol.utils.Network
 import com.example.peoplesontrol.utils.Status
-import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -39,9 +32,6 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
     private val binding get() = _binding!!
 
     private lateinit var viewModel: RequestViewModel
-
-    private lateinit var currentLocation: Location
-    private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     private var requests: ArrayList<Request> = arrayListOf()
 
     override fun onCreateView(
@@ -76,18 +66,12 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
                         Status.SUCCESS -> {
                             binding.progressBar.visibility = View.GONE
                             resource.data?.let { requestList -> retrieveData(requestList) }
-                            fusedLocationProviderClient =
-                                LocationServices.getFusedLocationProviderClient(this.requireActivity())
-                            fetchLocation()
+                            val mapFragment = childFragmentManager
+                                .findFragmentById(R.id.map) as SupportMapFragment
+                            mapFragment.getMapAsync(this)
                         }
                         Status.ERROR -> {
                             binding.progressBar.visibility = View.GONE
-                            Toast.makeText(
-                                this.requireContext(),
-                                resource.message,
-                                Toast.LENGTH_LONG
-                            )
-                                .show()
                             Error.showError(this.requireActivity())
                         }
                         Status.LOADING -> {
@@ -103,9 +87,9 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
                         Status.SUCCESS -> {
                             binding.progressBar.visibility = View.GONE
                             resource.data?.let { requestList -> retrieveData(requestList) }
-                            fusedLocationProviderClient =
-                                LocationServices.getFusedLocationProviderClient(this.requireActivity())
-                            fetchLocation()
+                            val mapFragment = childFragmentManager
+                                .findFragmentById(R.id.map) as SupportMapFragment
+                            mapFragment.getMapAsync(this)
                         }
                         Status.ERROR -> {
                             binding.progressBar.visibility = View.GONE
@@ -126,10 +110,7 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
     }
 
     override fun onMapReady(p0: GoogleMap) {
-        val currentLatLng = LatLng(currentLocation.latitude, currentLocation.longitude)
-        val markerOptions = MarkerOptions().position(currentLatLng)
-            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))
-        p0.addMarker(markerOptions)
+        val currentLatLng = LatLng(48.015884, 37.802850)
         for (i in requests) {
             when {
                 i.problem_categories.isEmpty() -> {
@@ -178,53 +159,11 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
         p0.setOnMarkerClickListener(this)
     }
 
-    private fun fetchLocation() {
-        if (ActivityCompat.checkSelfPermission(
-                this.requireContext(), Manifest.permission.ACCESS_FINE_LOCATION
-            ) !=
-            PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                this.requireContext(), Manifest.permission.ACCESS_COARSE_LOCATION
-            ) !=
-            PackageManager.PERMISSION_GRANTED
-        ) {
-            ActivityCompat.requestPermissions(
-                this.requireActivity(),
-                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), PERMISSION_CODE
-            )
-            return
-        }
-        val task = fusedLocationProviderClient.lastLocation
-        task.addOnSuccessListener {
-            if (it != null) {
-                currentLocation = it
-                val supportMapFragment = (childFragmentManager.findFragmentById(R.id.map) as
-                        SupportMapFragment?)!!
-                supportMapFragment.getMapAsync(this)
-            }
-        }
-    }
-
-    override fun onRequestPermissionsResult(
-        requestCode: Int, permissions: Array<String?>,
-        grantResults: IntArray
-    ) {
-        if (requestCode == PERMISSION_CODE) {
-            if (grantResults.isNotEmpty() && grantResults[0] ==
-                PackageManager.PERMISSION_GRANTED
-            ) {
-                fetchLocation()
-            }
-        }
-    }
 
     override fun onMarkerClick(p0: Marker): Boolean {
         val request = requests.find { request -> request.location == p0.title }
         val dialogAppealFragment = request?.let { DialogRequestFragment.newInstance(it) }
         dialogAppealFragment?.show(childFragmentManager, MAP)
         return true
-    }
-
-    companion object {
-        private const val PERMISSION_CODE = 101
     }
 }

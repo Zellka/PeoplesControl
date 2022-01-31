@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
+import com.example.peoplesontrol.R
 import com.example.peoplesontrol.data.model.Request
 import com.example.peoplesontrol.databinding.FragmentDialogRequestBinding
 
@@ -35,7 +36,7 @@ class DialogRequestFragment : DialogFragment() {
         binding.idRequest.text = "№" + request?.requestId.toString()
         binding.descriptionRequest.text = request?.description
         if(request?.problem_categories?.isEmpty() == true) {
-            binding.nameRequest.text = "Категория"
+            binding.nameRequest.text = resources.getString(R.string.input_category)
         } else {
             binding.nameRequest.text = request?.problem_categories?.get(0)?.title
         }

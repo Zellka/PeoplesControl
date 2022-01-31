@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import com.example.peoplesontrol.R
 import com.example.peoplesontrol.databinding.FragmentDialogMapBinding
@@ -54,6 +55,9 @@ class DialogMapFragment : DialogFragment(), OnMapReadyCallback {
         val mapFragment = childFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
+        binding.btnClose.setOnClickListener {
+            dialog?.cancel()
+        }
     }
 
     override fun onMapReady(p0: GoogleMap) {

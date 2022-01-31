@@ -7,6 +7,7 @@ import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
 import com.example.peoplesontrol.data.model.Request
 import com.example.peoplesontrol.databinding.ItemRequestBinding
+import com.squareup.picasso.Picasso
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -80,11 +81,6 @@ class RequestAdapter(private var listener: (Request, Boolean) -> Unit) :
                         ) {
                             resultList.add(row)
                         }
-                        /*if (row.problem_categories[0].title.toLowerCase(Locale.ROOT)
-                                .contains(charSearch.lowercase(Locale.ROOT))
-                        ) {
-                            resultList.add(row)
-                        }*/
                         if (row.description?.toLowerCase(Locale.ROOT)
                             !!.contains(charSearch.toLowerCase(Locale.ROOT))
                         ) {

@@ -87,12 +87,6 @@ class CategoriesFragment : Fragment() {
                         }
                         Status.ERROR -> {
                             binding.progressBar.visibility = View.GONE
-                            Toast.makeText(
-                                this.requireContext(),
-                                resource.message,
-                                Toast.LENGTH_LONG
-                            )
-                                .show()
                             Error.showError(this.requireActivity())
                         }
                         Status.LOADING -> {
@@ -113,11 +107,6 @@ class CategoriesFragment : Fragment() {
                         }
                         Status.ERROR -> {
                             binding.progressBar.visibility = View.GONE
-                            Toast.makeText(
-                                this.requireContext(),
-                                resource.message,
-                                Toast.LENGTH_LONG
-                            ).show()
                             Error.showError(this.requireActivity())
                         }
                         Status.LOADING -> {

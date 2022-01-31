@@ -64,11 +64,6 @@ class ProfileFragment : Fragment() {
         setupViewModel()
         setupUI()
         getProfile()
-        binding.swipeRefresh.setOnRefreshListener {
-            binding.progressBar.visibility = View.INVISIBLE
-            getProfile()
-            binding.swipeRefresh.isRefreshing = false
-        }
     }
 
     private fun setupViewModel() {
@@ -184,7 +179,6 @@ class ProfileFragment : Fragment() {
                     it?.let { resource ->
                         when (resource.status) {
                             Status.SUCCESS -> {
-                                (view?.parent as ViewGroup).removeView(view)
                                 Toast.makeText(
                                     this.requireContext(),
                                     resources.getString(R.string.success_remove),
@@ -192,7 +186,7 @@ class ProfileFragment : Fragment() {
                                 ).show()
                             }
                             Status.ERROR -> {
-                                if (resource.message?.contains("401") == true) {
+                                if (resource.message?.contains(resources.getString(R.string.error_401)) == true) {
                                     refreshToken()
                                 } else {
                                     Error.showError(this.requireActivity())
@@ -217,7 +211,10 @@ class ProfileFragment : Fragment() {
                             .getSharedPreferences("REFRESH_TOKEN", Context.MODE_PRIVATE)
                         val editor = sharedPreference.edit()
                         editor.clear()
-                        editor.putString("refreshToken", Data.token.refreshToken)
+                        editor.putString(
+                            resources.getString(R.string.token_name),
+                            Data.token.refreshToken
+                        )
                         editor.apply()
                         Toast.makeText(
                             this.requireContext(),

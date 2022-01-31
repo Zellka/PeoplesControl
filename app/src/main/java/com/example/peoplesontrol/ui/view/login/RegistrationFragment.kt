@@ -50,18 +50,20 @@ class RegistrationFragment : Fragment() {
         setupViewModel()
         binding.btnLogin.setOnClickListener {
             if (Network.isConnected(this.requireActivity())) {
-                if (binding.editName.text!!.isNotEmpty() && binding.editNumber.text!!.isNotEmpty() && binding.editPassword.text!!.isNotEmpty()) {
+                val phone = binding.editLogin.text.toString().replace("-", "").replace("(", "")
+                    .replace(")", "").replace(" ", "")
+                if (binding.editName.text!!.isNotEmpty() && binding.editLogin.text!!.isNotEmpty() && binding.editPassword.text!!.isNotEmpty()) {
                     signup(
                         Signup(
                             binding.editName.text.toString(),
-                            binding.editNumber.text.toString(),
+                            phone,
                             binding.editPassword.text.toString()
                         )
                     )
                 } else {
                     binding.inputName.error = resources.getString(R.string.input_error)
-                    binding.inputNumber.error = resources.getString(R.string.input_error)
-                    binding.inputPassword.error = resources.getString(R.string.input_error)
+                    binding.inputLogin.error = resources.getString(R.string.input_error)
+                    binding.inputPassword.error = resources.getString(R.string.error_password)
                 }
             } else {
                 Error.showInternetError(this.requireActivity())
@@ -93,8 +95,7 @@ class RegistrationFragment : Fragment() {
                         findNavController().navigate(R.id.action_registrationFragment_to_loginFragment)
                     }
                     Status.ERROR -> {
-                        Toast.makeText(this.requireContext(), resource.message, Toast.LENGTH_LONG)
-                            .show()
+                        binding.inputPassword.error = resources.getString(R.string.error_password)
                         Error.showError(this.requireActivity())
                     }
                 }
@@ -113,9 +114,9 @@ class RegistrationFragment : Fragment() {
 
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) = Unit
         })
-        binding.editNumber.addTextChangedListener(object : TextWatcher {
+        binding.editLogin.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable) {
-                binding.inputNumber.error = null
+                binding.inputLogin.error = null
             }
 
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) =

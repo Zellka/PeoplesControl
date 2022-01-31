@@ -5,8 +5,10 @@ import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
+import com.example.peoplesontrol.R
 import com.example.peoplesontrol.data.model.Category
 import com.example.peoplesontrol.databinding.ItemCategoryBinding
+import com.squareup.picasso.Picasso
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -39,7 +41,12 @@ class CategoryAdapter(private var listener: (Category) -> Unit) :
     inner class CategoryHolder(var binding: ItemCategoryBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(category: Category) {
-            //binding.imgCategory.setImageResource(category.icon)
+            if(category.icon != null) {
+                Picasso.get().load("http://164.92.215.12:8644" + category.icon).centerCrop()
+                    .error(R.drawable.placeholder_category)
+                    .placeholder(R.drawable.placeholder_category)
+                    .into(binding.imgCategory)
+            }
             binding.titleCategory.text = category.title
         }
     }

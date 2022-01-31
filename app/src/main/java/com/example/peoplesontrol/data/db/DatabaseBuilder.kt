@@ -20,6 +20,6 @@ object DatabaseBuilder {
         Room.databaseBuilder(
             context.applicationContext,
             AppDatabase::class.java,
-            "control"
+            "db-people-control"
         ).build()
 }
