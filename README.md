@@ -16,19 +16,19 @@
 * Выход и удаление аккаунта
 * Расписание транспорта с отмеченным маршрутом на карте (выбирается город, маршрут, направление, остановка, время ==> выводится приблизительное время прибытия транспорта)
 
-# Снимки экрана:
+## Снимки экрана:
 ![](https://github.com/Zellka/PeoplesControl/blob/master/image/1.png)
 ![](https://github.com/Zellka/PeoplesControl/blob/master/image/2.png)
 ![](https://github.com/Zellka/PeoplesControl/blob/master/image/3.png)
 ![](https://github.com/Zellka/PeoplesControl/blob/master/image/4.png)
 
-# Приложение
+## Приложение
 ![](https://github.com/Zellka/PeoplesControl/blob/master/image/preview.gif)
 
-# .apk
+## .apk
 [apk](https://github.com/Zellka/PeoplesControl/blob/master/PeoplesControl.apk)
 
-# Библиотеки и другая документация
+## Библиотеки и другая документация
 * Retrofit [Docs](https://square.github.io/retrofit/)
 * Google map [Docs](https://developers.google.com/maps/documentation/android-sdk/start?hl=ru)
 * Coroutines [Docs](https://kotlinlang.org/docs/coroutines-overview.html)
