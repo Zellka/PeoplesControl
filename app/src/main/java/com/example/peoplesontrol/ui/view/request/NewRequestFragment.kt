@@ -99,7 +99,7 @@ class NewRequestFragment : Fragment() {
         var latLng: LatLng? = null
         binding.btnSend.setOnClickListener {
             if (Network.isConnected(this.requireActivity())) {
-                if(isDataNotEmpty()) {
+                if (isDataNotEmpty()) {
                     val category = categories.find { it.title == chooseCategory }
                     val categoriesId = mutableListOf<Int>()
                     category?.let { categoriesId.add(it.categoryId) }
@@ -219,12 +219,11 @@ class NewRequestFragment : Fragment() {
                         ).show()
                     }
                     Status.ERROR -> {
-                        Toast.makeText(this.requireContext(), resource.message, Toast.LENGTH_SHORT).show()
-                        /*if (resource.message?.contains(resources.getString(R.string.error_401)) == true) {
+                        if (resource.message?.contains(resources.getString(R.string.error_401)) == true) {
                             refreshToken()
                         } else {
                             Error.showError(this.requireActivity())
-                        }*/
+                        }
                     }
                 }
             }
