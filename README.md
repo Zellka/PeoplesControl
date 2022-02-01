@@ -25,9 +25,6 @@
 ## Приложение
 ![](https://github.com/Zellka/PeoplesControl/blob/master/image/preview.gif)
 
-## .apk
-[apk](https://github.com/Zellka/PeoplesControl/blob/master/PeopleControl.apk)
-
 ## Библиотеки и другая документация
 * Retrofit [Docs](https://square.github.io/retrofit/)
 * Google map [Docs](https://developers.google.com/maps/documentation/android-sdk/start?hl=ru)
