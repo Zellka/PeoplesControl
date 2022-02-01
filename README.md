@@ -38,4 +38,4 @@
 
 
 
-***Note:*** Данные из [http://164.92.215.12:8644/](http://164.92.215.12:8644/).
+***Заметка:*** Данные из [PeoplesControlAPI](https://github.com/Dioneya/PeoplesControlAPI).
