@@ -219,11 +219,7 @@ class NewRequestFragment : Fragment() {
                         ).show()
                     }
                     Status.ERROR -> {
-                        if (resource.message?.contains(resources.getString(R.string.error_401)) == true) {
-                            refreshToken()
-                        } else {
-                            Error.showError(this.requireActivity())
-                        }
+                        refreshToken()
                     }
                 }
             }
@@ -275,7 +271,7 @@ class NewRequestFragment : Fragment() {
                         val editor = sharedPreference.edit()
                         editor.clear()
                         editor.putString(
-                            resources.getString(R.string.token_name),
+                            "refreshToken",
                             Data.token.refreshToken
                         )
                         editor.apply()

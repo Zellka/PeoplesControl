@@ -31,7 +31,7 @@ class SplashActivity : AppCompatActivity() {
         val btnNext = findViewById<Button>(R.id.btn_next)
         val sharedPreference = getSharedPreferences("REFRESH_TOKEN", Context.MODE_PRIVATE)
         val refreshToken =
-            sharedPreference.getString(resources.getString(R.string.token_name), null)
+            sharedPreference.getString("refreshToken", null)
         refreshToken(Message(refreshToken.toString()), "Bearer " + refreshToken.toString())
         btnNext.setOnClickListener {
             startActivity(Intent(this, LoginActivity::class.java))
@@ -59,7 +59,7 @@ class SplashActivity : AppCompatActivity() {
                         val editor = sharedPreference.edit()
                         editor.clear()
                         editor.putString(
-                            resources.getString(R.string.token_name),
+                            "refreshToken",
                             Data.token.refreshToken
                         )
                         editor.apply()

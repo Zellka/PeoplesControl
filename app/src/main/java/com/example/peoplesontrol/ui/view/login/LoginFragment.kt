@@ -104,7 +104,7 @@ class LoginFragment : Fragment() {
             this.requireContext().getSharedPreferences("REFRESH_TOKEN", Context.MODE_PRIVATE)
         val editor = sharedPreference.edit()
         editor.clear()
-        editor.putString(resources.getString(R.string.token_name), Data.token.refreshToken)
+        editor.putString("refreshToken", Data.token.refreshToken)
         editor.apply()
     }
 

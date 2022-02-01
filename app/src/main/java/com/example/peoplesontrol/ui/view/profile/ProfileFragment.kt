@@ -102,11 +102,7 @@ class ProfileFragment : Fragment() {
                                 resource.message,
                                 Toast.LENGTH_LONG
                             ).show()
-                            if (resource.message?.contains("401") == true) {
-                                refreshToken()
-                            } else {
-                                Error.showError(this.requireActivity())
-                            }
+                            refreshToken()
                         }
                         Status.LOADING -> {
                             binding.progressBar.visibility = View.VISIBLE
@@ -186,11 +182,7 @@ class ProfileFragment : Fragment() {
                                 ).show()
                             }
                             Status.ERROR -> {
-                                if (resource.message?.contains(resources.getString(R.string.error_401)) == true) {
-                                    refreshToken()
-                                } else {
-                                    Error.showError(this.requireActivity())
-                                }
+                                refreshToken()
                             }
                         }
                     }
@@ -212,7 +204,7 @@ class ProfileFragment : Fragment() {
                         val editor = sharedPreference.edit()
                         editor.clear()
                         editor.putString(
-                            resources.getString(R.string.token_name),
+                            "refreshToken",
                             Data.token.refreshToken
                         )
                         editor.apply()

@@ -202,11 +202,7 @@ class EditRequestFragment : Fragment() {
                             findNavController().navigate(R.id.action_editRequestFragment_to_profileFragment)
                         }
                         Status.ERROR -> {
-                            if (resource.message?.contains(resources.getString(R.string.error_401)) == true) {
-                                refreshToken()
-                            } else {
-                                Error.showError(this.requireActivity())
-                            }
+                            refreshToken()
                         }
                     }
                 }
@@ -240,11 +236,7 @@ class EditRequestFragment : Fragment() {
                             ).show()
                         }
                         Status.ERROR -> {
-                            if (resource.message?.contains(resources.getString(R.string.error_401)) == true) {
-                                refreshToken()
-                            } else {
-                                Error.showError(this.requireActivity())
-                            }
+                            refreshToken()
                         }
                     }
                 }

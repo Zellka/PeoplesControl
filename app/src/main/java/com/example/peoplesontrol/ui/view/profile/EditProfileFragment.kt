@@ -111,11 +111,7 @@ class EditProfileFragment : Fragment() {
                                 findNavController().navigate((R.id.action_editProfileFragment_to_profileFragment))
                             }
                             Status.ERROR -> {
-                                if (resource.message?.contains("401") == true) {
-                                    refreshToken()
-                                } else {
-                                    Error.showError(this.requireActivity())
-                                }
+                                refreshToken()
                             }
                         }
                     }
@@ -143,11 +139,7 @@ class EditProfileFragment : Fragment() {
                                 )
                             }
                             Status.ERROR -> {
-                                if (resource.message?.contains("401") == true) {
-                                    refreshToken()
-                                } else {
-                                    Error.showError(this.requireActivity())
-                                }
+                                refreshToken()
                             }
                         }
                     }
@@ -173,11 +165,7 @@ class EditProfileFragment : Fragment() {
                             startActivity(Intent(this.requireContext(), SplashActivity::class.java))
                         }
                         Status.ERROR -> {
-                            if (resource.message?.contains(resources.getString(R.string.error_401)) == true) {
-                                refreshToken()
-                            } else {
-                                Error.showError(this.requireActivity())
-                            }
+                            refreshToken()
                         }
                     }
                 }
