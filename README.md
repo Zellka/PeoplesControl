@@ -1,5 +1,6 @@
 # Народный контроль
-![](https://github.com/Zellka/PeoplesControl/blob/master/image/icon.png)
+
+### Rонтроль за состоянием сфер жизнедеятельности города по отраслям
 
 ## Функции
 * Вход и регистрация
@@ -25,7 +26,7 @@
 ![](https://github.com/Zellka/PeoplesControl/blob/master/image/preview.gif)
 
 # .apk
-[](https://github.com/Zellka/PeoplesControl/blob/master/PeoplesControl.apk)
+[apk](https://github.com/Zellka/PeoplesControl/blob/master/PeoplesControl.apk)
 
 # Библиотеки и другая документация
 * Retrofit [Docs](https://square.github.io/retrofit/)
@@ -34,6 +35,7 @@
 * Room [Docs](https://developer.android.google.cn/reference/androidx/room/Room)
 * Picasso [Docs](https://square.github.io/picasso/)
 * View Binding [Docs](https://developer.android.com/topic/libraries/view-binding)
+
 
 
 ***Note:*** Данные из [http://164.92.215.12:8644/](http://164.92.215.12:8644/).
